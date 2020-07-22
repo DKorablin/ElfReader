@@ -4,12 +4,16 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("ElfReader")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Danila Korablin")]
 [assembly: AssemblyProduct("Executable and Linkable Format Reader")]
 [assembly: AssemblyCopyright("Copyright © Danila Korablin 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+#endif
 
 [assembly: ComVisible(false)]
 
