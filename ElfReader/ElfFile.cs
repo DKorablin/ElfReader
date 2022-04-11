@@ -32,9 +32,9 @@ namespace AlphaOmega.Debug
 		{
 			get
 			{
-				if(this._sections == null)
-					this._sections = this.ReadSections();
-				return this._sections;
+				return this._sections == null
+					? this._sections = this.ReadSections()
+					: this._sections;
 			}
 		}
 
@@ -134,6 +134,17 @@ namespace AlphaOmega.Debug
 			foreach(Section section in this.Sections)
 				if(section.sh_type == Elf.SHT.RELA)
 					yield return new RelocationASection(section);
+		}
+
+		/// <summary>This section contains information about user readable objects for debugging.</summary>
+		/// <remarks>This contents are unspecified.</remarks>
+		public DebugStringSection GetDebugStringSection()
+		{
+			foreach(Section section in this.Sections)
+				if(section.Name == Constant.SectionNames.DebugString)
+					return new DebugStringSection(section);
+
+			return null;
 		}
 
 		/// <summary>Get all sections by section type</summary>

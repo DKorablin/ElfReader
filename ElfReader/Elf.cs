@@ -630,8 +630,8 @@ namespace AlphaOmega.Debug
 		[StructLayout(LayoutKind.Sequential)]
 		public struct Elf32_Shdr
 		{
-			/// <summary>This member specifies the name of the section.</summary>
-			/// <remarks>Its value is an index into the section header string table section giving the location of a null-terminated string.</remarks>
+			/// <summary>Specifies the section name.</summary>
+			/// <remarks>The value of this field is an index into the section header string table section, wherein it indicates the beginning of a null-terminated string that names the section.</remarks>
 			public UInt32 sh_name;
 			/// <summary>This member categorizes the section's contents and semantics.</summary>
 			public SHT sh_type;

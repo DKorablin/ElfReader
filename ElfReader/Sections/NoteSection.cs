@@ -22,8 +22,11 @@ namespace AlphaOmega.Debug
 		/// <returns>Stream of notes from current section</returns>
 		public IEnumerator<NoteSectionItem> GetEnumerator()
 		{
+			//Byte[] data = base.Section.GetData();
+
+
 			UInt64 offset = base.Section.sh_offset;
-			UInt64 maxOffset = base.Section.sh_offset + this.Section.sh_size;
+			UInt64 maxOffset = offset + base.Section.sh_size;
 			ElfHeader header = base.Section.File.Header;
 
 			while(offset < maxOffset)
@@ -31,6 +34,8 @@ namespace AlphaOmega.Debug
 				UInt64 namesz = header.ReadInt(ref offset);
 				if(namesz == 0)
 					break;
+				if(namesz + offset > maxOffset)
+					break;//TODO:mystem.so -> ...overflow error... Int32/Int64 (?)
 
 				UInt64 descsz = header.ReadInt(ref offset);
 

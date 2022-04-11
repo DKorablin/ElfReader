@@ -4,20 +4,15 @@ using System.Runtime.InteropServices;
 using AlphaOmega.Debug;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Demo
 {
 	class Program
 	{
-		static String[] sos = new String[]{
-			@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\libAkSoundEnginePlugin.so",
-			@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\libmain.so",
-			@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\libmono.so",
-			@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\libunity.so",
-		};
 		static void Main(String[] args)
 		{
-			foreach(String so in sos)
+			foreach(String so in Directory.GetFiles(@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\", "*.so", SearchOption.AllDirectories))
 				ReadSo(so);
 		}
 
@@ -28,15 +23,20 @@ namespace Demo
 				Utils.ConsoleWriteMembers(file.Header.Identification);
 				if(file.Header.IsValid)
 				{
+					DebugStringSection debugSection = file.GetDebugStringSection();
+					if(debugSection != null)
+						foreach(var symbolSec in debugSection)
+							Utils.ConsoleWriteMembers(symbolSec);
+
+					foreach(var noteSec in file.GetNotesSections())
+						foreach(var note in noteSec)
+							Utils.ConsoleWriteMembers(note);
+
 					Utils.ConsoleWriteMembers(file.Header.Header);
 
 					foreach(var strSec in file.GetStringSections())
 						foreach(var str in strSec)
 							Utils.ConsoleWriteMembers(str);
-
-					foreach(var noteSec in file.GetNotesSections())
-						foreach(var note in noteSec)
-							Utils.ConsoleWriteMembers(note);
 
 					foreach(var symbolSec in file.GetSymbolSections())
 						foreach(var symbol in symbolSec)

@@ -29,6 +29,12 @@ namespace AlphaOmega.Debug
 			/// The contents are unspecified.
 			/// </summary>
 			public const String Debug = ".debug";
+
+			/// <summary>
+			/// This section contains information about user readable objects for debugging.
+			/// This contents are unspecified.
+			/// </summary>
+			public const String DebugString = ".debug_str";
 			/// <summary>
 			/// This section holds dynamic linking information.
 			/// The section’s attributes will include the SHF_ALLOC bit.
