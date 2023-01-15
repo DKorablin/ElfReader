@@ -1,6 +1,6 @@
 ﻿## ELF Reader
 
-![Nuget](https://img.shields.io/nuget/v/AlphaOmega.ElfReader)
+[![Nuget](https://img.shields.io/nuget/v/AlphaOmega.ElfReader)](https://www.nuget.org/packages/AlphaOmega.ElfReader)
 
 Executable and Linkable file reader
 
