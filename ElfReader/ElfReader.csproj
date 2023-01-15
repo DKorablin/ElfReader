@@ -43,19 +43,19 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\ImageLoader\BinaryEndianReader.cs">
+    <Compile Include="..\FileReader.Shared\ImageLoader\BinaryEndianReader.cs">
       <Link>ImageLoader\BinaryEndianReader.cs</Link>
     </Compile>
-    <Compile Include="..\..\ImageLoader\EndianHelper.cs">
+    <Compile Include="..\FileReader.Shared\ImageLoader\EndianHelper.cs">
       <Link>ImageLoader\EndianHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\ImageLoader\IImageLoader.cs">
+    <Compile Include="..\FileReader.Shared\ImageLoader\IImageLoader.cs">
       <Link>ImageLoader\IImageLoader.cs</Link>
     </Compile>
-    <Compile Include="..\..\ImageLoader\LookupLoader.cs">
+    <Compile Include="..\FileReader.Shared\ImageLoader\LookupLoader.cs">
       <Link>ImageLoader\LookupLoader.cs</Link>
     </Compile>
-    <Compile Include="..\..\ImageLoader\StreamLoader.cs">
+    <Compile Include="..\FileReader.Shared\ImageLoader\StreamLoader.cs">
       <Link>ImageLoader\StreamLoader.cs</Link>
     </Compile>
     <Compile Include="Constant.cs" />

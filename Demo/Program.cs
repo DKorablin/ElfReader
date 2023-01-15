@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
-using AlphaOmega.Debug;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Linq;
+using AlphaOmega.Debug;
 
 namespace Demo
 {
