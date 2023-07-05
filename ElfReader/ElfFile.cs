@@ -17,7 +17,7 @@ namespace AlphaOmega.Debug
 
 		/// <summary>
 		/// An object file's section header table lets one locate all the file's sections.
-		/// The section header table is an array of Elf32_Shdr or Elf64_Shdr structures as described below.
+		/// The section header table is an array of <see cref="Elf.Elf32_Shdr"/> or <see cref="Elf.Elf64_Shdr"/> structures as described below.
 		/// A section header table index is a subscript into this array.
 		/// The ELF header's e_shoff member gives the byte offset from the beginning of the file to the section header table.
 		/// e_shnum normally tells how many entries the section header table contains.
@@ -30,16 +30,11 @@ namespace AlphaOmega.Debug
 		/// </remarks>
 		public Section[] Sections
 		{
-			get
-			{
-				return this._sections == null
-					? this._sections = this.ReadSections()
-					: this._sections;
-			}
+			get { return this._sections ?? (this._sections = this.ReadSections()); }
 		}
 
-		/// <summary>This member holds the section header table of the entry associated with the section name string table.</summary>
-		/// <remarks>If the file has no section name string table, this member returns null.</remarks>
+		/// <summary>This member holds the section header table of the entry associated with the section name string table</summary>
+		/// <remarks>If the file has no section name string table, this member returns null</remarks>
 		public StringSection SectionNames
 		{
 			get
@@ -91,10 +86,9 @@ namespace AlphaOmega.Debug
 
 		/// <summary>
 		/// Sometimes a vendor or system builder needs to mark an object file with special information that other programs will check for conformance, compatibility, and so forth.
-		/// Sections of type SHT_NOTE and program header elements of type PT_NOTE can be used for this purpose.
-		/// 
-		/// The note information in sections and program header elements holds any number of entries, each of which is an array of 4-byte words in the format of the target processor.
+		/// Sections of type <see cref="Elf.SHT.NOTE"/> and program header elements of type PT_NOTE can be used for this purpose.
 		/// </summary>
+		/// <remarks>The note information in sections and program header elements holds any number of entries, each of which is an array of 4-byte words in the format of the target processor</remarks>
 		public IEnumerable<NoteSection> GetNotesSections()
 		{
 			foreach(Section section in this.GetSectionByType(Elf.SHT.NOTE))
@@ -136,8 +130,8 @@ namespace AlphaOmega.Debug
 					yield return new RelocationASection(section);
 		}
 
-		/// <summary>This section contains information about user readable objects for debugging.</summary>
-		/// <remarks>This contents are unspecified.</remarks>
+		/// <summary>This section contains information about user readable objects for debugging</summary>
+		/// <remarks>This contents are unspecified</remarks>
 		public DebugStringSection GetDebugStringSection()
 		{
 			foreach(Section section in this.Sections)
@@ -186,6 +180,7 @@ namespace AlphaOmega.Debug
 			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
+
 		/// <summary>Dispose managed objects</summary>
 		/// <param name="disposing">Dispose managed objects</param>
 		protected virtual void Dispose(Boolean disposing)

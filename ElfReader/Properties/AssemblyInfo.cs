@@ -1,24 +1,21 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ElfReader")]
-[assembly: AssemblyDescription("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("32beaa22-a8fe-4671-8294-4bb1b9cbb1ca")]
+
+[assembly: System.CLSCompliant(false)]
+
+#if !NETSTANDARD
 [assembly: AssemblyCompany("Danila Korablin")]
-[assembly: AssemblyProduct("Executable and Linkable Format Reader")]
 [assembly: AssemblyCopyright("Copyright © Danila Korablin 2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyProduct("Executable and Linkable Format Reader")]
+[assembly: AssemblyTitle("ELF Reader")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
-
-[assembly: ComVisible(false)]
-
-[assembly: Guid("32beaa22-a8fe-4671-8294-4bb1b9cbb1ca")]
-
-[assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: System.CLSCompliant(false)]
+[assembly: AssemblyInformationalVersion("1.0.0")]
+#endif

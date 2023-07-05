@@ -1,7 +1,0 @@
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\obj\Release\AlphaOmega.Debug.Properties.Resources.resources
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\obj\Release\ElfReader.csproj.GenerateResource.Cache
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\obj\Release\ElfReader.pdb
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\bin\Release\ElfReader.xml
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\bin\Release\ElfReader.dll
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\bin\Release\ElfReader.pdb
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\ElfReader\obj\Release\ElfReader.dll

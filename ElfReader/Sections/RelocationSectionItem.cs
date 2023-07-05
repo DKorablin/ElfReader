@@ -2,18 +2,18 @@
 
 namespace AlphaOmega.Debug
 {
-	/// <summary>
-	/// Relocation is the process of connecting symbolic references with symbolic definitions.
+	/// <summary>Relocation is the process of connecting symbolic references with symbolic definitions</summary>
+	/// <remarks>
 	/// For example, when a program calls a function, the associated call instruction must transfer control to the proper destination address at execution.
 	/// In other words, relocatable files must have information that describes how to modify their section contents, thus allowing executable and shared object files to hold the right information for a process's program image.
-	/// </summary>
+	/// </remarks>
 	public class RelocationSectionItem
 	{
-		/// <summary>
-		/// This member gives the location at which to apply the relocation action.
+		/// <summary>This member gives the location at which to apply the relocation action</summary>
+		/// <remarks>
 		/// For a relocatable file, the value is the byte offset from the beginning of the section to the storage unit affected by the relocation.
 		/// For an executable file or a shared object, the value is the virtual address of the storage unit affected by the relocation.
-		/// </summary>
+		/// </remarks>
 		public readonly UInt64 r_offset;
 
 		/// <summary>
@@ -32,8 +32,8 @@ namespace AlphaOmega.Debug
 		{ }
 
 		/// <summary>Create instance of the relocation section item information (Used for .rela section)</summary>
-		/// <param name="r_offset">This member gives the location at which to apply the relocation action.</param>
-		/// <param name="r_info">This member gives both the symbol table index, with respect to which the relocation must be made, and the type of relocation to apply.</param>
+		/// <param name="r_offset">This member gives the location at which to apply the relocation action</param>
+		/// <param name="r_info">This member gives both the symbol table index, with respect to which the relocation must be made, and the type of relocation to apply</param>
 		protected internal RelocationSectionItem(UInt64 r_offset, UInt64 r_info)
 		{
 			this.r_offset = r_offset;

@@ -6,10 +6,8 @@ using AlphaOmega.Debug.Properties;
 
 namespace AlphaOmega.Debug
 {
-	/// <summary>
-	/// An object file's symbol table holds information needed to locate and relocate a program's symbolic definitions and references. A symbol table index is a subscript into this array.
-	/// Index 0 both designates the first entry in the table and serves as the undefined symbol index.
-	/// </summary>
+	/// <summary>An object file's symbol table holds information needed to locate and relocate a program's symbolic definitions and references. A symbol table index is a subscript into this array</summary>
+	/// <remarks>Index 0 both designates the first entry in the table and serves as the undefined symbol index</remarks>
 	public class SymbolSection : SectionBase, IEnumerable<SymbolSectionItem>
 	{//https://blogs.oracle.com/ali/entry/inside_elf_symbol_tables
 		//https://blogs.oracle.com/ali/entry/gnu_hash_elf_sections

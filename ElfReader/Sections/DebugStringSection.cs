@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AlphaOmega.Debug
 {
-	/// <summary>This section contains information about user readable objects for debugging.</summary>
+	/// <summary>This section contains information about user readable objects for debugging</summary>
 	public class DebugStringSection : SectionBase,IEnumerable<StringSectionItem>
 	{
 		private SortedList<UInt32, String> _data;

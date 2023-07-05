@@ -9,7 +9,7 @@ namespace AlphaOmega.Debug
 	/// </summary>
 	public class RelocationASectionItem : RelocationSectionItem
 	{
-		/// <summary>This member specifies a constant addend used to compute the value to be stored into the relocatable field.</summary>
+		/// <summary>This member specifies a constant addend used to compute the value to be stored into the relocatable field</summary>
 		public readonly Int64 r_addend;
 
 		internal RelocationASectionItem(Elf.Elf32_Rela relocation)

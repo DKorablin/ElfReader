@@ -1,8 +1,0 @@
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\bin\Debug\Demo.exe.config
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\bin\Debug\Demo.exe
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\bin\Debug\Demo.pdb
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\bin\Debug\ElfReader.dll
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\bin\Debug\ElfReader.pdb
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\obj\x86\Debug\Demo.csprojResolveAssemblyReference.cache
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\obj\x86\Debug\Demo.exe
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\obj\x86\Debug\Demo.pdb

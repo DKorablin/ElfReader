@@ -1,1 +1,0 @@
-C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\ElfReader\Demo\bin\Release\Demo.exe.config

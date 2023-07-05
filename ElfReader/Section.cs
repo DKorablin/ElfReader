@@ -5,7 +5,7 @@ namespace AlphaOmega.Debug
 {
 	/// <summary>
 	/// An object file's section header table lets one locate all the file's sections.
-	/// The section header table is an array of Elf32_Shdr or Elf64_Shdr structures as described below.
+	/// The section header table is an array of <see cref="Elf.Elf32_Shdr"/> or <see cref="Elf.Elf64_Shdr"/> structures as described below.
 	/// A section header table index is a subscript into this array.
 	/// The ELF header's e_shoff member gives the byte offset from the beginning of the file to the section header table.
 	/// e_shnum normally tells how many entries the section header table contains.
@@ -22,35 +22,35 @@ namespace AlphaOmega.Debug
 		private readonly ElfFile _file;
 		private readonly UInt32 _index;
 
-		/// <summary>This member specifies the name of the section.</summary>
-		/// <remarks>Its value is an index into the section header string table section (see "String Table") giving the location of a null-terminated string.</remarks>
+		/// <summary>This member specifies the name of the section</summary>
+		/// <remarks>Its value is an index into the section header string table section (see "String Table") giving the location of a null-terminated string</remarks>
 		public readonly UInt32 sh_name;
 
-		/// <summary>This member categorizes the section's contents and semantics.</summary>
+		/// <summary>This member categorizes the section's contents and semantics</summary>
 		public readonly Elf.SHT sh_type;
 
-		/// <summary>Sections support 1-bit flags that describe miscellaneous attributes.</summary>
+		/// <summary>Sections support 1-bit flags that describe miscellaneous attributes</summary>
 		public readonly Elf.SHF sh_flags;
 
-		/// <summary>If the section is to appear in the memory image of a process, this member gives the address at which the section's first byte should reside. Otherwise, the member contains 0.</summary>
+		/// <summary>If the section is to appear in the memory image of a process, this member gives the address at which the section's first byte should reside. Otherwise, the member contains 0</summary>
 		public readonly UInt64 sh_addr;
 
 		/// <summary>
 		/// This member gives the byte offset from the beginning of the file to the first byte in the section.
-		/// Section type SHT_NOBITS, described below, occupies no space in the file, and its sh_offset member locates the conceptual placement in the file.
+		/// Section type <see cref="Elf.SHT.NOBITS"/>, described below, occupies no space in the file, and its sh_offset member locates the conceptual placement in the file.
 		/// </summary>
 		public readonly UInt64 sh_offset;
 
 		/// <summary>
-		/// This member gives the section's size in bytes. Unless the section type is SHT_NOBITS, the section occupies sh_size bytes in the file.
-		/// A section of type SHT_NOBITS can have a nonzero size, but it occupies no space in the file.
+		/// This member gives the section's size in bytes. Unless the section type is <see cref="Elf.SHT.NOBITS"/>, the section occupies sh_size bytes in the file.
+		/// A section of type <see cref="Elf.SHT.NOBITS"/> can have a nonzero size, but it occupies no space in the file.
 		/// </summary>
 		public readonly UInt64 sh_size;
 
-		/// <summary>This member holds a section header table index link, whose interpretation depends on the section type.</summary>
+		/// <summary>This member holds a section header table index link, whose interpretation depends on the section type</summary>
 		public readonly UInt32 sh_link;
 
-		/// <summary>This member holds extra information, whose interpretation depends on the section type.</summary>
+		/// <summary>This member holds extra information, whose interpretation depends on the section type</summary>
 		public readonly UInt32 sh_info;
 
 		/// <summary>
@@ -62,16 +62,16 @@ namespace AlphaOmega.Debug
 		/// </summary>
 		public readonly UInt64 sh_addralign;
 
-		/// <summary>
-		/// Some sections hold a table of fixed-size entries, such as a symbol table.
+		/// <summary>Some sections hold a table of fixed-size entries, such as a symbol table</summary>
+		/// <remarks>
 		/// For such a section, this member gives the size in bytes of each entry.
 		/// The member contains 0 if the section does not hold a table of fixed-size entries.
-		/// </summary>
+		/// </remarks>
 		public readonly UInt64 sh_entsize;
 
 		internal ElfFile File { get { return this._file; } }
 
-		/// <summary>This member specifies the name of the section.</summary>
+		/// <summary>This member specifies the name of the section</summary>
 		public String Name { get { return this.File.SectionNames[this.sh_name]; } }
 
 		/// <summary>Section index</summary>
@@ -85,13 +85,13 @@ namespace AlphaOmega.Debug
 		/// </remarks>
 		public Elf.SHF Flags { get { return (Elf.SHF)this.sh_flags; } }
 
-		/// <summary>Values in this inclusive range are reserved for operating system-specific semantics.</summary>
+		/// <summary>Values in this inclusive range are reserved for operating system-specific semantics</summary>
 		public Boolean IsOs { get { return this.sh_type >= Elf.SHT.LOOS && this.sh_type <= Elf.SHT.HIOS; } }
 
-		/// <summary>Values in this inclusive range are reserved for processor-specific semantics.</summary>
+		/// <summary>Values in this inclusive range are reserved for processor-specific semantics</summary>
 		public Boolean IsProc { get { return this.sh_type >= Elf.SHT.LOPROC && this.sh_type <= Elf.SHT.HIPROC; } }
 
-		/// <summary>Section types between SHT_LOUSER and SHT_HIUSER can be used by the application, without conflicting with current or future system-defined section types.</summary>
+		/// <summary>Section types between SHT_LOUSER and SHT_HIUSER can be used by the application, without conflicting with current or future system-defined section types</summary>
 		public Boolean IsUser { get { return this.sh_type >= Elf.SHT.LOUSER && this.sh_type <= Elf.SHT.HIUSER; } }
 
 
@@ -127,10 +127,7 @@ namespace AlphaOmega.Debug
 
 		private Section(ElfFile file, UInt32 index)
 		{
-			if(file == null)
-				throw new ArgumentNullException("file");
-
-			this._file = file;
+			this._file = file ?? throw new ArgumentNullException(nameof(file));
 			this._index = index;
 		}
 
@@ -138,10 +135,9 @@ namespace AlphaOmega.Debug
 		/// <returns>Raw section data</returns>
 		public Byte[] GetData()
 		{
-			if(this.sh_type == Elf.SHT.NOBITS)
-				return new Byte[] { };
-			else
-				return this.File.Header.ReadBytes(this.sh_offset, this.sh_size);
+			return this.sh_type == Elf.SHT.NOBITS
+				? new Byte[] { }
+				: this.File.Header.ReadBytes(this.sh_offset, this.sh_size);
 		}
 	}
 }

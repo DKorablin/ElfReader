@@ -73,10 +73,7 @@ namespace AlphaOmega.Debug
 		/// <param name="loader">Stream of data</param>
 		public ElfHeader(IImageLoader loader)
 		{
-			if(loader == null)
-				throw new ArgumentNullException("loader");
-
-			this._loader = loader;
+			this._loader = loader ?? throw new ArgumentNullException(nameof(loader));
 			this._loader.Endianness = EndianHelper.Endianness;
 		}
 

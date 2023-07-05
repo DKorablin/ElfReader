@@ -30,7 +30,7 @@ namespace AlphaOmega.Debug
 			}
 		}
 
-		/// <summary>Create instance of the string table section.</summary>
+		/// <summary>Create instance of the string table section</summary>
 		/// <param name="section">String table section. section.st_type must be equans to Elf.SHT.STRTAB</param>
 		internal StringSection(Section section)
 			: base(section, Elf.SHT.STRTAB)

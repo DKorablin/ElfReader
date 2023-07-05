@@ -9,7 +9,7 @@ namespace Demo
 	{
 		static void Main(String[] args)
 		{
-			foreach(String so in Directory.GetFiles(@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\", "*.so", SearchOption.AllDirectories))
+			foreach(String so in Directory.GetFiles(@"C:\Visual Studio Projects\C#\Shared.Classes\AlphaOmega.Debug\FileReader\Samples", "*.so", SearchOption.AllDirectories))
 				ReadSo(so);
 		}
 

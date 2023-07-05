@@ -24,12 +24,10 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Create instance of the basic section information</summary>
 		/// <param name="section">ELF section information</param>
+		/// <exception cref="ArgumentNullException">Section is null</exception>
 		internal SectionBase(Section section)
 		{
-			if(section == null)
-				throw new ArgumentNullException("section");
-
-			this._section = section;
+			this._section = section ?? throw new ArgumentNullException(nameof(section));
 		}
 	}
 }
