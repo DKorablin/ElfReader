@@ -6,7 +6,7 @@
     <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
     <AssemblyTitle>ELF Reader</AssemblyTitle>
     <Company>Danila Korablin</Company>
-    <Product>JVM ClassFile reader</Product>
+    <Product>Executable and Linkable Format Reader</Product>
     <Copyright>Copyright © Danila Korablin 2016-2023</Copyright>
     <Configuration>Debug</Configuration>
     <AssemblyVersion>1.0.*</AssemblyVersion>
