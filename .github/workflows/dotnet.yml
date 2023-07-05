@@ -47,9 +47,9 @@ jobs:
     needs: [test_net_standard20_windows,test_net_standard20_ubuntu]
     runs-on: ubuntu-latest
     outputs:
-      new_version: ${{ steps.tag_version.outputs.new_version }}
-      new_tag: ${{ steps.tag_version.outputs.new_tag }}
-      changelog:  ${{ steps.tag_version.outputs.changelog }}
+      new_version: ${{steps.tag_version.outputs.new_version}}
+      new_tag: ${{steps.tag_version.outputs.new_tag}}
+      changelog:  ${{steps.tag_version.outputs.changelog}}
     steps:
     - name: Update version number
       id: tag_version
@@ -104,7 +104,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ${{env.SolutionName}}.sln
     - name: Build .NET Standard v2.0
-      run: dotnet build ${{env.SolutionName}}.sln --configuration Release --no-restore /p:OutputPath="../bin/" /p:DocumentationFile="../bin/${{ env.SolutionName }}.xml" /p:SignAssembly=true /p:AssemblyOriginatorKeyFile="${{ steps.sign_key_file.outputs.filePath }}" /p:AssemblyVersion=${{needs.version.outputs.new_version}} /p:FileVersion=${{needs.version.outputs.new_version}} /p:InformationalVersion=${{needs.version.outputs.new_version}}
+      run: dotnet build ${{env.SolutionName}}.sln --configuration Release --no-restore /p:OutputPath="../bin/" /p:DocumentationFile="../bin/${{env.SolutionName}}.xml" /p:SignAssembly=true /p:AssemblyOriginatorKeyFile="${{steps.sign_key_file.outputs.filePath}}" /p:AssemblyVersion=${{needs.version.outputs.new_version}} /p:FileVersion=${{needs.version.outputs.new_version}} /p:InformationalVersion=${{needs.version.outputs.new_version}}
     - name: Deploy artifacts
       uses: actions/upload-artifact@v3
       with:
