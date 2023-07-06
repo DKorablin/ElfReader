@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 #if !NETSTANDARD
 [assembly: AssemblyCompany("Danila Korablin")]
-[assembly: AssemblyCopyright("Copyright © Danila Korablin 2016")]
+[assembly: AssemblyCopyright("Copyright © Danila Korablin 2016-2023")]
 [assembly: AssemblyProduct("Executable and Linkable Format Reader")]
 [assembly: AssemblyTitle("ELF Reader")]
 #if DEBUG
