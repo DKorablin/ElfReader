@@ -1,6 +1,6 @@
 ﻿## ELF Reader
 
-[![Auto build](https://github.com/DKorablin/ElfReader/actions/workflows/dotnet.yml/badge.svg)](https://github.com/DKorablin/ElfReader/releases/latest)
+[![Auto build](https://github.com/DKorablin/ElfReader/actions/workflows/release.yml/badge.svg)](https://github.com/DKorablin/ElfReader/releases/latest)
 [![Nuget](https://img.shields.io/nuget/v/AlphaOmega.ElfReader)](https://www.nuget.org/packages/AlphaOmega.ElfReader)
 
 Executable and Linkable file reader
