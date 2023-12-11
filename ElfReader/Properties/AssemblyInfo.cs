@@ -6,7 +6,9 @@ using System.Runtime.InteropServices;
 
 [assembly: System.CLSCompliant(false)]
 
-#if !NETSTANDARD
+#if NETSTANDARD
+[assembly: AssemblyMetadata("RepositoryUrl", "https://github.com/DKorablin/ElfReader")]
+#else
 [assembly: AssemblyCompany("Danila Korablin")]
 [assembly: AssemblyCopyright("Copyright © Danila Korablin 2016-2023")]
 [assembly: AssemblyProduct("Executable and Linkable Format Reader")]

@@ -6,10 +6,8 @@ namespace AlphaOmega.Debug
 	/// <summary>Basic section information for the strongly typed sections</summary>
 	public class SectionBase
 	{
-		private readonly Section _section;
-
 		/// <summary>ELF section information</summary>
-		public Section Section { get { return this._section; } }
+		public Section Section { get; }
 
 		/// <summary>Create instance of the basic section information with section type check</summary>
 		/// <param name="section">ELF section information</param>
@@ -26,8 +24,6 @@ namespace AlphaOmega.Debug
 		/// <param name="section">ELF section information</param>
 		/// <exception cref="ArgumentNullException">Section is null</exception>
 		internal SectionBase(Section section)
-		{
-			this._section = section ?? throw new ArgumentNullException(nameof(section));
-		}
+			=> this.Section = section ?? throw new ArgumentNullException(nameof(section));
 	}
 }

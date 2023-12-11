@@ -16,12 +16,9 @@ namespace AlphaOmega.Debug
 	/// In such contexts, the reserved values do not represent actual sections in the object file.
 	/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 	/// </remarks>
-	[DebuggerDisplay("Index={Index} Name={Name}")]
+	[DebuggerDisplay("Index={"+nameof(Index)+"} Name={"+nameof(Name)+"}")]
 	public class Section : ISectionData
 	{
-		private readonly ElfFile _file;
-		private readonly UInt32 _index;
-
 		/// <summary>This member specifies the name of the section</summary>
 		/// <remarks>Its value is an index into the section header string table section (see "String Table") giving the location of a null-terminated string</remarks>
 		public readonly UInt32 sh_name;
@@ -69,13 +66,13 @@ namespace AlphaOmega.Debug
 		/// </remarks>
 		public readonly UInt64 sh_entsize;
 
-		internal ElfFile File { get { return this._file; } }
+		internal ElfFile File { get; }
 
 		/// <summary>This member specifies the name of the section</summary>
-		public String Name { get { return this.File.SectionNames[this.sh_name]; } }
+		public String Name => this.File.SectionNames[this.sh_name];
 
 		/// <summary>Section index</summary>
-		public UInt32 Index { get { return this._index; } }
+		public UInt32 Index { get; }
 
 		/// <summary>Section Attribute Flags</summary>
 		/// <remarks>
@@ -83,16 +80,16 @@ namespace AlphaOmega.Debug
 		/// Otherwise, the attribute is off or does not apply.
 		/// Undefined attributes are reserved and set to zero.
 		/// </remarks>
-		public Elf.SHF Flags { get { return (Elf.SHF)this.sh_flags; } }
+		public Elf.SHF Flags => this.sh_flags;
 
 		/// <summary>Values in this inclusive range are reserved for operating system-specific semantics</summary>
-		public Boolean IsOs { get { return this.sh_type >= Elf.SHT.LOOS && this.sh_type <= Elf.SHT.HIOS; } }
+		public Boolean IsOs => this.sh_type >= Elf.SHT.LOOS && this.sh_type <= Elf.SHT.HIOS;
 
 		/// <summary>Values in this inclusive range are reserved for processor-specific semantics</summary>
-		public Boolean IsProc { get { return this.sh_type >= Elf.SHT.LOPROC && this.sh_type <= Elf.SHT.HIPROC; } }
+		public Boolean IsProc => this.sh_type >= Elf.SHT.LOPROC && this.sh_type <= Elf.SHT.HIPROC;
 
 		/// <summary>Section types between SHT_LOUSER and SHT_HIUSER can be used by the application, without conflicting with current or future system-defined section types</summary>
-		public Boolean IsUser { get { return this.sh_type >= Elf.SHT.LOUSER && this.sh_type <= Elf.SHT.HIUSER; } }
+		public Boolean IsUser => this.sh_type >= Elf.SHT.LOUSER && this.sh_type <= Elf.SHT.HIUSER;
 
 
 		internal Section(ElfFile file, UInt32 index, Elf.Elf32_Shdr section)
@@ -127,17 +124,15 @@ namespace AlphaOmega.Debug
 
 		private Section(ElfFile file, UInt32 index)
 		{
-			this._file = file ?? throw new ArgumentNullException(nameof(file));
-			this._index = index;
+			this.File = file ?? throw new ArgumentNullException(nameof(file));
+			this.Index = index;
 		}
 
 		/// <summary>Get raw section data</summary>
 		/// <returns>Raw section data</returns>
 		public Byte[] GetData()
-		{
-			return this.sh_type == Elf.SHT.NOBITS
+			=> this.sh_type == Elf.SHT.NOBITS
 				? new Byte[] { }
 				: this.File.Header.ReadBytes(this.sh_offset, this.sh_size);
-		}
 	}
 }

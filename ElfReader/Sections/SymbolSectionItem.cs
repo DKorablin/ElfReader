@@ -8,7 +8,7 @@ namespace AlphaOmega.Debug
 	/// A symbol table index is a subscript into this array
 	/// </summary>
 	/// <remarks>Index 0 both designates the first entry in the table and serves as the undefined symbol index</remarks>
-	[DebuggerDisplay("SecRef={st_shndx} NameRef={Name}")]
+	[DebuggerDisplay("SecRef={"+nameof(st_shndx)+"} NameRef={"+nameof(Name)+"}")]
 	public class SymbolSectionItem
 	{
 		/// <summary>This member holds an index into the object file's symbol string table, which holds the character representations of the symbol names</summary>
@@ -44,13 +44,13 @@ namespace AlphaOmega.Debug
 		public readonly UInt64 st_size;
 
 		/// <summary>A symbol's binding determines the linkage visibility and behavior</summary>
-		public Elf.STB Bind { get { return (Elf.STB)(this.st_info >> 4); } }
+		public Elf.STB Bind => (Elf.STB)(this.st_info >> 4);
 
 		/// <summary>A symbol's type provides a general classification for the associated entity</summary>
-		public Elf.STT Type { get { return (Elf.STT)(this.st_info & 0xf); } }
+		public Elf.STT Type => (Elf.STT)(this.st_info & 0xf);
 
 		/// <summary>Symbol visibility</summary>
-		public Elf.STV Visibility { get { return (Elf.STV)(this.st_other & 0x3); } }
+		public Elf.STV Visibility => (Elf.STV)(this.st_other & 0x3);
 
 		/// <summary>Character representation of the symbol name</summary>
 		public String Name { get; internal set; }

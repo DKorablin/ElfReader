@@ -5,8 +5,6 @@ namespace AlphaOmega.Debug
 	/// <summary>ELF image header</summary>
 	public class Header
 	{
-		private readonly ElfHeader _header;
-
 		/// <summary>This member identifies the object file type</summary>
 		public readonly Elf.ET e_type;
 		/// <summary>This member's value specifies the required architecture for an individual file</summary>
@@ -71,8 +69,7 @@ namespace AlphaOmega.Debug
 			}
 		}
 
-		internal Header(ElfHeader header, Elf.Elf32_Ehdr header32)
-			: this(header)
+		internal Header(Elf.Elf32_Ehdr header32)
 		{
 			this.e_type = header32.e_type;
 			this.e_machine = header32.e_machine;
@@ -89,8 +86,7 @@ namespace AlphaOmega.Debug
 			this.e_shstrndx = header32.e_shstrndx;
 		}
 
-		internal Header(ElfHeader header, Elf.Elf64_Ehdr header64)
-			: this(header)
+		internal Header(Elf.Elf64_Ehdr header64)
 		{
 			this.e_type = header64.e_type;
 			this.e_machine = header64.e_machine;
@@ -105,11 +101,6 @@ namespace AlphaOmega.Debug
 			this.e_shentsize = header64.e_shentsize;
 			this.e_shnum = header64.e_shnum;
 			this.e_shstrndx = header64.e_shstrndx;
-		}
-
-		private Header(ElfHeader header)
-		{
-			this._header = header?? throw new ArgumentNullException(nameof(header));
 		}
 	}
 }

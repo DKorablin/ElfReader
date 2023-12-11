@@ -21,12 +21,10 @@ namespace AlphaOmega.Debug
 		{
 			get
 			{
-				String result;
 				SortedList<UInt32, String> strings = this.GetData();
-				if(strings.TryGetValue(index, out result))
-					return result;
-				else
-					return this.GetDataByPointer(index);
+				return strings.TryGetValue(index, out String result)
+					? result
+					: this.GetDataByPointer(index);
 			}
 		}
 
@@ -34,8 +32,7 @@ namespace AlphaOmega.Debug
 		/// <param name="section">String table section. section.st_type must be equans to Elf.SHT.STRTAB</param>
 		internal StringSection(Section section)
 			: base(section, Elf.SHT.STRTAB)
-		{
-		}
+		{ }
 
 		private SortedList<UInt32, String> GetData()
 		{
@@ -86,8 +83,6 @@ namespace AlphaOmega.Debug
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+			=> this.GetEnumerator();
 	}
 }

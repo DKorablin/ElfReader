@@ -12,8 +12,7 @@ namespace AlphaOmega.Debug
 
 		internal DebugStringSection(Section section)
 			: base(section, Elf.SHT.PROGBITS)
-		{
-		}
+		{ }
 
 		private SortedList<UInt32, String> GetData()
 		{
@@ -50,8 +49,6 @@ namespace AlphaOmega.Debug
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+			=> this.GetEnumerator();
 	}
 }

@@ -14,14 +14,10 @@ namespace AlphaOmega.Debug
 
 		internal RelocationASectionItem(Elf.Elf32_Rela relocation)
 			: base(relocation.r_offset, relocation.r_info)
-		{
-			this.r_addend = relocation.r_addend;
-		}
+			=> this.r_addend = relocation.r_addend;
 
 		internal RelocationASectionItem(Elf.Elf64_Rela relocation)
 			: base(relocation.r_offset, relocation.r_info)
-		{
-			this.r_addend = relocation.r_addend;
-		}
+			=> this.r_addend = relocation.r_addend;
 	}
 }

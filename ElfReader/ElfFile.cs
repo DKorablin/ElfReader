@@ -6,14 +6,11 @@ namespace AlphaOmega.Debug
 	/// <summary>ELF file description. With header and all sections</summary>
 	public class ElfFile : IDisposable
 	{
-		#region Fields
-		private ElfHeader _header;
 		private Section[] _sections;
 		private StringSection _sectionNames;
-		#endregion Fields
 
 		/// <summary>ELF32/64 header</summary>
-		public ElfHeader Header { get { return this._header; } }
+		public ElfHeader Header { get; private set; }
 
 		/// <summary>
 		/// An object file's section header table lets one locate all the file's sections.
@@ -28,10 +25,7 @@ namespace AlphaOmega.Debug
 		/// In such contexts, the reserved values do not represent actual sections in the object file.
 		/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 		/// </remarks>
-		public Section[] Sections
-		{
-			get { return this._sections ?? (this._sections = this.ReadSections()); }
-		}
+		public Section[] Sections => this._sections ?? (this._sections = this.ReadSections());
 
 		/// <summary>This member holds the section header table of the entry associated with the section name string table</summary>
 		/// <remarks>If the file has no section name string table, this member returns null</remarks>
@@ -51,10 +45,12 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Create instance of the ELF file reader</summary>
 		/// <param name="loader">Stream of data</param>
+		/// <exception cref="ArgumentNullException">Loader is null</exception>
 		/// <exception cref="InvalidOperationException">Invalid ELF header</exception>
 		public ElfFile(IImageLoader loader)
 		{
-			this._header = new ElfHeader(loader);
+			_ = loader ?? throw new ArgumentNullException(nameof(loader));
+			this.Header = new ElfHeader(loader);
 
 			if(!this.Header.IsValid)
 				throw new InvalidOperationException("Invalid ELF header");
@@ -62,7 +58,7 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Gets a STRTAB section from specified index</summary>
 		/// <param name="index">section index with type STRTAB</param>
-		/// <returns>STRTAB section from specified index or exception</returns>
+		/// <returns>STRTAB section from specified index or null</returns>
 		public StringSection GetStringSection(UInt32 index)
 		{
 			foreach(Section section in this.GetSectionByType(Elf.SHT.STRTAB))
@@ -185,10 +181,10 @@ namespace AlphaOmega.Debug
 		/// <param name="disposing">Dispose managed objects</param>
 		protected virtual void Dispose(Boolean disposing)
 		{
-			if(disposing && this._header != null)
+			if(disposing && this.Header != null)
 			{
-				this._header.Dispose();
-				this._header = null;
+				this.Header.Dispose();
+				this.Header = null;
 			}
 		}
 	}

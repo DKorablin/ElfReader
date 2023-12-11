@@ -11,20 +11,20 @@
     <Configuration>Debug</Configuration>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-		<InformationalVersion>1.0.0</InformationalVersion>
     <Deterministic>false</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\..\bin\</OutputPath>
     <DocumentationFile>..\..\bin\ElfReader.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>False</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\..\..\..\AlphaOmega (NoPwd).snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
+	<ItemGroup>
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.15.0.81779">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
   <ItemGroup>
     <Compile Include="..\FileReader.Shared\ImageLoader\BinaryEndianReader.cs">
       <Link>ImageLoader\BinaryEndianReader.cs</Link>

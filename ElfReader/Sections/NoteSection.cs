@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using AlphaOmega.Debug.Properties;
 
 namespace AlphaOmega.Debug
 {
@@ -15,15 +14,13 @@ namespace AlphaOmega.Debug
 	{
 		internal NoteSection(Section section)
 			: base(section, Elf.SHT.NOTE)
-		{
-		}
+		{ }
 
 		/// <summary>Get all notes from current section</summary>
 		/// <returns>Stream of notes from current section</returns>
 		public IEnumerator<NoteSectionItem> GetEnumerator()
 		{
 			//Byte[] data = base.Section.GetData();
-
 
 			UInt64 offset = base.Section.sh_offset;
 			UInt64 maxOffset = offset + base.Section.sh_size;
@@ -48,7 +45,7 @@ namespace AlphaOmega.Debug
 				offset += descsz;
 
 				UInt64 p = header.SizeOfInt;
-				UInt64 padding = ((offset) % p) != 0 ? (p - (offset) % p) : 0;
+				UInt64 padding = (offset % p) != 0 ? (p - (offset % p)) : 0;
 				offset += padding;//TODO: Check it
 
 				yield return new NoteSectionItem(type, name, descriptor);
@@ -56,8 +53,6 @@ namespace AlphaOmega.Debug
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+			=> this.GetEnumerator();
 	}
 }

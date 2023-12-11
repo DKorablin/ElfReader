@@ -13,19 +13,13 @@ namespace AlphaOmega.Debug
 	public class RelocationASection : SectionBase, IEnumerable<RelocationSectionItem>
 	{
 		private UInt64 SizeOfStruct
-		{
-			get
-			{
-				return base.Section.File.Header.Is64Bit
-					? (UInt64)Marshal.SizeOf(typeof(Elf.Elf64_Rela))
-					: (UInt64)Marshal.SizeOf(typeof(Elf.Elf32_Rela));
-			}
-		}
+			=> base.Section.File.Header.Is64Bit
+				? (UInt64)Marshal.SizeOf(typeof(Elf.Elf64_Rela))
+				: (UInt64)Marshal.SizeOf(typeof(Elf.Elf32_Rela));
 
 		internal RelocationASection(Section section)
 			: base(section, Elf.SHT.RELA)
-		{
-		}
+		{ }
 
 		/// <summary>Get all relocations with addendum constant in the section</summary>
 		/// <returns>Stream of all relocations with addendum constant from current section</returns>
@@ -55,8 +49,6 @@ namespace AlphaOmega.Debug
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+			=> this.GetEnumerator();
 	}
 }

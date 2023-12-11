@@ -10,10 +10,9 @@ namespace AlphaOmega.Debug
 		private static readonly UInt32 SizeOfIdentity = (UInt32)Marshal.SizeOf(typeof(Elf.EI));
 		private Elf.EI? _identity;
 		private Header _header;
-		private IImageLoader _loader;
 
 		/// <summary>Image loader interface</summary>
-		public IImageLoader Loader { get { return this._loader; } }
+		public IImageLoader Loader { get; private set; }
 
 		/// <summary>ELF file identification information</summary>
 		public Elf.EI Identification
@@ -24,35 +23,31 @@ namespace AlphaOmega.Debug
 				{
 					this._identity = this.Loader.PtrToStructure<Elf.EI>(0);
 					if(this._identity.Value.IsValid)
-					switch(this._identity.Value.data)
-					{
-					case Elf.ELFDATA._2LSB:
-						this._loader.Endianness = EndianHelper.Endian.Little;
-						break;
-					case Elf.ELFDATA._2MSB:
-						this._loader.Endianness = EndianHelper.Endian.Big;
-						break;
-					default:
-						throw new NotImplementedException();
-					}
+						switch(this._identity.Value.data)
+						{
+						case Elf.ELFDATA._2LSB:
+							this.Loader.Endianness = EndianHelper.Endian.Little;
+							break;
+						case Elf.ELFDATA._2MSB:
+							this.Loader.Endianness = EndianHelper.Endian.Big;
+							break;
+						default:
+							throw new NotImplementedException();
+						}
 				}
 				return this._identity.Value;
 			}
 		}
 
 		/// <summary>This file contains valid ELF header</summary>
-		public Boolean IsValid { get { return this.Identification.IsValid; } }
+		public Boolean IsValid => this.Identification.IsValid;
 
 		/// <summary>This file for 64-byte address space</summary>
 		public Boolean Is64Bit
-		{
-			get { return this.Identification._class == Elf.ELFCLASS.CLASS64; }
-		}
+			=> this.Identification._class == Elf.ELFCLASS.CLASS64;
 
 		internal UInt64 SizeOfInt
-		{
-			get { return (UInt64)(this.Is64Bit ? sizeof(UInt64) : sizeof(UInt32)); }
-		}
+			=> (UInt64)(this.Is64Bit ? sizeof(UInt64) : sizeof(UInt32));
 
 		/// <summary>ELF file header</summary>
 		public Header Header
@@ -62,8 +57,8 @@ namespace AlphaOmega.Debug
 				if(this._header == null)
 				{
 					this._header = this.Is64Bit
-						? new Header(this, this.GetHeader<Elf.Elf64_Ehdr>())
-						: new Header(this, this.GetHeader<Elf.Elf32_Ehdr>());
+						? new Header(this.GetHeader<Elf.Elf64_Ehdr>())
+						: new Header(this.GetHeader<Elf.Elf32_Ehdr>());
 				}
 				return this._header;
 			}
@@ -73,26 +68,21 @@ namespace AlphaOmega.Debug
 		/// <param name="loader">Stream of data</param>
 		public ElfHeader(IImageLoader loader)
 		{
-			this._loader = loader ?? throw new ArgumentNullException(nameof(loader));
-			this._loader.Endianness = EndianHelper.Endianness;
+			this.Loader = loader ?? throw new ArgumentNullException(nameof(loader));
+			this.Loader.Endianness = EndianHelper.Endianness;
 		}
 
 		private T GetHeader<T>() where T : struct
-		{
-			if(!this.Identification.IsValid)
-				throw new InvalidOperationException(Resources.errHeaderInvalid);
-
-			return this.Loader.PtrToStructure<T>(ElfHeader.SizeOfIdentity);
-		}
+			=> this.Identification.IsValid
+				? this.Loader.PtrToStructure<T>(ElfHeader.SizeOfIdentity)
+				: throw new InvalidOperationException(Resources.errHeaderInvalid);
 
 		/// <summary>Read bytes from image</summary>
 		/// <param name="offset">offset from beggining of the file</param>
 		/// <param name="length">How much to read</param>
 		/// <returns>Readed bytes</returns>
 		public Byte[] ReadBytes(UInt64 offset, UInt64 length)
-		{
-			return this.Loader.ReadBytes(checked((UInt32)offset), checked((UInt32)length));
-		}
+			=> this.Loader.ReadBytes(checked((UInt32)offset), checked((UInt32)length));
 
 		/// <summary>Reads integer</summary>
 		/// <param name="offset"></param>
@@ -118,17 +108,13 @@ namespace AlphaOmega.Debug
 		/// <param name="offset">RVA to the beggining of structure</param>
 		/// <returns>Mapped structure</returns>
 		public T PtrToStructure<T>(UInt64 offset) where T : struct
-		{
-			return this.Loader.PtrToStructure<T>(checked((UInt32)offset));
-		}
+			=> this.Loader.PtrToStructure<T>(checked((UInt32)offset));
 
 		/// <summary>Get string from specific RVA</summary>
 		/// <param name="offset">RVA to the beggining of string</param>
 		/// <returns>Mapped string</returns>
 		public String PtrToStringAnsi(UInt64 offset)
-		{
-			return this.Loader.PtrToStringAnsi(checked((UInt32)offset));
-		}
+			=> this.Loader.PtrToStringAnsi(checked((UInt32)offset));
 
 		/// <summary>dispose data reader and all managed resources</summary>
 		public void Dispose()
@@ -141,10 +127,10 @@ namespace AlphaOmega.Debug
 		/// <param name="disposing">Dispose managed objects</param>
 		protected virtual void Dispose(Boolean disposing)
 		{
-			if(disposing && this._loader != null)
+			if(disposing && this.Loader != null)
 			{
-				this._loader.Dispose();
-				this._loader = null;
+				this.Loader.Dispose();
+				this.Loader = null;
 			}
 		}
 	}

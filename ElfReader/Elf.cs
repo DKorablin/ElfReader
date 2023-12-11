@@ -147,12 +147,7 @@ namespace AlphaOmega.Debug
 
 			/// <summary>ELF header is valid</summary>
 			public Boolean IsValid
-			{
-				get
-				{
-					return this.magic[0] == 0x7f && this.magic[1] == 0x45 && this.magic[2] == 0x4c && this.magic[3] == 0x46;
-				}
-			}
+				=> this.magic[0] == 0x7f && this.magic[1] == 0x45 && this.magic[2] == 0x4c && this.magic[3] == 0x46;
 		}
 
 		/// <summary>File Identifiers</summary>
@@ -161,7 +156,7 @@ namespace AlphaOmega.Debug
 		/// Values from ET_LOPROC through ET_HIPROC (inclusive) are reserved for processor-specific semantics.
 		/// Other values are reserved and will be assigned to new object file types as necessary.
 		/// </remarks>
-		public enum ET : ushort
+		public enum ET : UInt16
 		{
 			/// <summary>No file type</summary>
 			NONE = 0,
@@ -185,7 +180,7 @@ namespace AlphaOmega.Debug
 		/// Processor-specific ELF names use the machine name to distinguish them.
 		/// For example, the flags mentioned below use the prefix EF_; a flag named WIDGET for the EM_XYZ machine would be called EF_XYZ_WIDGET.
 		/// </remarks>
-		public enum EM : ushort
+		public enum EM : UInt16
 		{
 			/// <summary>No machine</summary>
 			NONE = 0,
@@ -435,7 +430,7 @@ namespace AlphaOmega.Debug
 		}
 
 		/// <summary>Special section indexes</summary>
-		public enum SHN : ushort
+		public enum SHN : UInt16
 		{
 			/// <summary>
 			/// This value marks an undefined, missing, irrelevant, or otherwise meaningless section reference.
@@ -467,7 +462,7 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Section types</summary>
 		/// <remarks>Other section type values are reserved. As mentioned before, the section header for index 0 (<see cref="SHN.UNDEF"/>) exists, even though the index marks undefined section references</remarks>
-		public enum SHT : uint
+		public enum SHT : UInt32
 		{
 			/// <summary>This value marks the section header as inactive; it does not have an associated section</summary>
 			/// <remarks>Other members of the section header have undefined values</remarks>
@@ -554,7 +549,7 @@ namespace AlphaOmega.Debug
 		/// Undefined attributes are reserved and set to zero.
 		/// </remarks>
 		[Flags]
-		public enum SHF : uint
+		public enum SHF : UInt32
 		{
 			/// <summary>This section contains data that should be writable during process execution</summary>
 			WRITE=0x1,
@@ -670,16 +665,16 @@ namespace AlphaOmega.Debug
 			/// Otherwise, the attribute is off or does not apply.
 			/// Undefined attributes are reserved and set to zero.
 			/// </remarks>
-			public Elf.SHF Flags { get { return (SHF)this.sh_flags; } }
+			public Elf.SHF Flags => (SHF)this.sh_flags;
 
 			/// <summary>Values in this inclusive range are reserved for operating system-specific semantics</summary>
-			public Boolean IsOs { get { return this.sh_type >= SHT.LOOS && this.sh_type <= SHT.HIOS; } }
+			public Boolean IsOs => this.sh_type >= SHT.LOOS && this.sh_type <= SHT.HIOS;
 
 			/// <summary>Values in this inclusive range are reserved for processor-specific semantics</summary>
-			public Boolean IsProc { get { return this.sh_type >= SHT.LOPROC && this.sh_type <= SHT.HIPROC; } }
+			public Boolean IsProc => this.sh_type >= SHT.LOPROC && this.sh_type <= SHT.HIPROC;
 
 			/// <summary>Section types between <see cref="SHT.LOUSER"/> and <see cref="SHT.HIUSER"/> can be used by the application, without conflicting with current or future system-defined section types</summary>
-			public Boolean IsUser { get { return this.sh_type >= SHT.LOUSER && this.sh_type <= SHT.HIUSER; } }
+			public Boolean IsUser => this.sh_type >= SHT.LOUSER && this.sh_type <= SHT.HIUSER;
 		}
 
 		/// <summary>
@@ -744,29 +739,20 @@ namespace AlphaOmega.Debug
 			/// Otherwise, the attribute is off or does not apply.
 			/// Undefined attributes are reserved and set to zero.
 			/// </remarks>
-			public SHF Flags { get { return (SHF)this.sh_flags; } }
+			public SHF Flags => (SHF)this.sh_flags;
 
 			/// <summary>Values in this inclusive range are reserved for operating system-specific semantics</summary>
-			public Boolean IsOs
-			{
-				get { return this.sh_type > SHT.LOOS && this.sh_type < SHT.HIOS; }
-			}
+			public Boolean IsOs => this.sh_type > SHT.LOOS && this.sh_type < SHT.HIOS;
 
 			/// <summary>Values in this inclusive range are reserved for processor-specific semantics</summary>
-			public Boolean IsProc
-			{
-				get { return this.sh_type > SHT.LOPROC && this.sh_type < SHT.HIPROC; }
-			}
+			public Boolean IsProc => this.sh_type > SHT.LOPROC && this.sh_type < SHT.HIPROC;
 
 			/// <summary>Section types between <see cref="SHT.LOUSER"/> and <see cref="SHT.HIUSER"/> can be used by the application, without conflicting with current or future system-defined section types</summary>
-			public Boolean IsUser
-			{
-				get { return this.sh_type > SHT.LOUSER && this.sh_type < SHT.HIUSER; }
-			}
+			public Boolean IsUser => this.sh_type > SHT.LOUSER && this.sh_type < SHT.HIUSER;
 		}
 
 		/// <summary>A symbol's visibility, although it may be specified in a relocatable object, defines how that symbol may be accessed once it has become part of an executable or shared object</summary>
-		public enum STV : byte
+		public enum STV : Byte
 		{
 			/// <summary>
 			/// The visibility of symbols with the <see cref="STV.DEFAULT"/> attribute is as specified by the symbol's binding type.
@@ -798,7 +784,7 @@ namespace AlphaOmega.Debug
 		}
 
 		/// <summary>A symbol's binding determines the linkage visibility and behavior</summary>
-		public enum STB : byte
+		public enum STB : Byte
 		{
 			/// <summary>Local symbols are not visible outside the object file containing their definition</summary>
 			/// <remarks>Local symbols of the same name can exist in multiple files without interfering with each other</remarks>
@@ -821,7 +807,7 @@ namespace AlphaOmega.Debug
 		}
 
 		/// <summary>A symbol's type provides a general classification for the associated entity</summary>
-		public enum STT : byte
+		public enum STT : Byte
 		{
 			/// <summary>The symbol's type is not specified</summary>
 			NOTYPE = 0,
@@ -909,13 +895,13 @@ namespace AlphaOmega.Debug
 			public UInt16 st_shndx;
 
 			/// <summary>A symbol's binding determines the linkage visibility and behavior</summary>
-			public STB Bind { get { return (STB)(this.st_info >> 4); } }
+			public STB Bind => (STB)(this.st_info >> 4);
 
 			/// <summary>A symbol's type provides a general classification for the associated entity</summary>
-			public STT Type { get { return (STT)(this.st_info & 0xf); } }
+			public STT Type => (STT)(this.st_info & 0xf);
 
 			/// <summary>Symbol visibility</summary>
-			public STV Visibility { get { return (STV)(this.st_other & 0x3); } }
+			public STV Visibility => (STV)(this.st_other & 0x3);
 		}
 
 		/// <summary>
@@ -958,13 +944,13 @@ namespace AlphaOmega.Debug
 			public UInt64 st_size;
 
 			/// <summary>A symbol's binding determines the linkage visibility and behavior</summary>
-			public STB Bind { get { return (STB)(this.st_info >> 4); } }
+			public STB Bind => (STB)(this.st_info >> 4);
 
 			/// <summary>A symbol's type provides a general classification for the associated entity</summary>
-			public STT Type { get { return (STT)(this.st_info & 0xf); } }
+			public STT Type => (STT)(this.st_info & 0xf);
 
 			/// <summary>Symbol visibility</summary>
-			public STV Visibility { get { return (STV)(this.st_other & 0x3); } }
+			public STV Visibility => (STV)(this.st_other & 0x3);
 		}
 
 		/// <summary>Relocation is the process of connecting symbolic references with symbolic definitions</summary>

@@ -14,14 +14,9 @@ namespace AlphaOmega.Debug
 		private StringSection _sectionSymbolNames;
 
 		private UInt64 SizeOfStruct
-		{
-			get
-			{
-				return base.Section.File.Header.Is64Bit
-					? (UInt64)Marshal.SizeOf(typeof(Elf.Elf64_Sym))
-					: (UInt64)Marshal.SizeOf(typeof(Elf.Elf32_Sym));
-			}
-		}
+			=> base.Section.File.Header.Is64Bit
+				? (UInt64)Marshal.SizeOf(typeof(Elf.Elf64_Sym))
+				: (UInt64)Marshal.SizeOf(typeof(Elf.Elf32_Sym));
 
 		private StringSection SectionSymbolNames
 		{
@@ -100,8 +95,6 @@ namespace AlphaOmega.Debug
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+			=> this.GetEnumerator();
 	}
 }
