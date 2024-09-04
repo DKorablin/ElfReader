@@ -49,7 +49,7 @@ jobs:
       new_tag: ${{steps.tag_version.outputs.new_tag}}
       changelog: ${{steps.tag_version.outputs.changelog}}
     steps:
-    - name: Update version number
+    - name: Updating version number
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.2
       with:
@@ -61,7 +61,7 @@ jobs:
     needs: [version]
     runs-on: windows-latest
     steps:
-    - name: Decode SNK
+    - name: Decoding SNK
       id: sign_key_file
       uses: timheuer/base64-to-file@v1.2
       with:
@@ -76,7 +76,7 @@ jobs:
       run: nuget restore "${{github.workspace}}\${{env.SolutionName}}.sln"
     - name: Building .NET Framework
       run: MSBuild -nologo -restore "${{github.workspace}}\${{env.SolutionName}}\${{env.SolutionName}}35.csproj" /property:Configuration=Release -property:OutputPath="${{github.workspace}}/bin/" -property:Version=${{needs.version.outputs.new_version}} -property:AssemblyOriginatorKeyFile="${{ steps.sign_key_file.outputs.filePath }}"
-    - name: Deploy artifacts
+    - name: Deploying artifacts
       uses: actions/upload-artifact@v4
       with:
         name: Net20
@@ -88,7 +88,7 @@ jobs:
     needs: [version]
     runs-on: ubuntu-latest
     steps:
-    - name: Decode SNK
+    - name: Decoding SNK
       id: sign_key_file
       uses: timheuer/base64-to-file@v1.2
       with:
@@ -118,11 +118,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Extract all artifacts
+    - name: Extracting all artifacts
       uses: actions/download-artifact@v4
       with:
         path: bin
-    - name: Zip artifact
+    - name: Zipping artifact
       run: zip -qq -r ${{github.event.repository.name}}_${{needs.version.outputs.new_tag}}.zip *
       working-directory: ${{github.workspace}}/bin
     - name: Deploying GitHub Release
@@ -136,15 +136,11 @@ jobs:
         generateReleaseNotes: true
 
   deploy_nuget:
-    name: Deploy NuGet package
+    name: Deploying NuGet package
     needs: [version, build_net_framework, build_net]
     runs-on: windows-latest
 
     steps:
-#    - name: Extracting all artifacts
-#      uses: actions/download-artifact@v4
-#      with:
-#        path: bin
     - name: Checkout nessesary files from repository
       uses: actions/checkout@v4
       with:
