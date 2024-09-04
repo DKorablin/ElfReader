@@ -47,13 +47,13 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ElfReader\ElfReader35.csproj">
-      <Project>{15E2BBA9-E714-46EE-B3CC-08CC54329DA1}</Project>
-      <Name>ElfReader35</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\ElfReader\ElfReader35.csproj">
+      <Project>{dfdf5226-d640-49cb-b1e7-a87b17052acc}</Project>
+      <Name>ElfReader35</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

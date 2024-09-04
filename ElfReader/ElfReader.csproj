@@ -1,45 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <OutputType>Library</OutputType>
-    <RootNamespace>AlphaOmega.Debug</RootNamespace>
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
-    <AssemblyTitle>ELF Reader</AssemblyTitle>
-    <Company>Danila Korablin</Company>
-    <Product>Executable and Linkable Format Reader</Product>
-    <Copyright>Copyright © Danila Korablin 2016-2023</Copyright>
-    <Configuration>Debug</Configuration>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Deterministic>false</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\bin\</OutputPath>
-    <DocumentationFile>..\..\bin\ElfReader.xml</DocumentationFile>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<OutputType>Library</OutputType>
+		<RootNamespace>AlphaOmega.Debug</RootNamespace>
+		<GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+		<AssemblyTitle>ELF Reader</AssemblyTitle>
+		<Company>Danila Korablin</Company>
+		<Product>Executable and Linkable Format Reader</Product>
+		<Copyright>Copyright © Danila Korablin 2016-2023</Copyright>
+		<Configuration>Debug</Configuration>
+		<AssemblyVersion>1.0.*</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<Deterministic>false</Deterministic>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<OutputPath>..\..\bin\</OutputPath>
+		<DocumentationFile>..\..\bin\ElfReader.xml</DocumentationFile>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.15.0.81779">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\FileReader.Shared\ImageLoader\BinaryEndianReader.cs">
-      <Link>ImageLoader\BinaryEndianReader.cs</Link>
-    </Compile>
-    <Compile Include="..\FileReader.Shared\ImageLoader\EndianHelper.cs">
-      <Link>ImageLoader\EndianHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\FileReader.Shared\ImageLoader\IImageLoader.cs">
-      <Link>ImageLoader\IImageLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\FileReader.Shared\ImageLoader\LookupLoader.cs">
-      <Link>ImageLoader\LookupLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\FileReader.Shared\ImageLoader\StreamLoader.cs">
-      <Link>ImageLoader\StreamLoader.cs</Link>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\FileReader.Shared\ImageLoader\BinaryEndianReader.cs">
+			<Link>ImageLoader\BinaryEndianReader.cs</Link>
+		</Compile>
+		<Compile Include="..\FileReader.Shared\ImageLoader\EndianHelper.cs">
+			<Link>ImageLoader\EndianHelper.cs</Link>
+		</Compile>
+		<Compile Include="..\FileReader.Shared\ImageLoader\IImageLoader.cs">
+			<Link>ImageLoader\IImageLoader.cs</Link>
+		</Compile>
+		<Compile Include="..\FileReader.Shared\ImageLoader\LookupLoader.cs">
+			<Link>ImageLoader\LookupLoader.cs</Link>
+		</Compile>
+		<Compile Include="..\FileReader.Shared\ImageLoader\StreamLoader.cs">
+			<Link>ImageLoader\StreamLoader.cs</Link>
+		</Compile>
+	</ItemGroup>
 </Project>
