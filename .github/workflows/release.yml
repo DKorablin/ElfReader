@@ -141,10 +141,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Extracting all artifacts
-      uses: actions/download-artifact@v4
-      with:
-        path: bin
+#    - name: Extracting all artifacts
+#      uses: actions/download-artifact@v4
+#      with:
+#        path: bin
     - name: Checkout nessesary files from repository
       uses: actions/checkout@v4
       with:
@@ -152,10 +152,10 @@ jobs:
           README.md
           ${{env.SolutionName}}.dll.nuspec
         sparse-checkout-cone-mode: false
-#    - name: Extracting all artifacts
-#      uses: actions/download-artifact@v4
-#      with:
-#        path: bin
+    - name: Extracting all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: bin
     - name: Packing artifacts
       run: nuget pack ${{env.SolutionName}}.dll.nuspec -Version ${{needs.version.outputs.new_version}} -OutputDirectory nupkg
     - name: Pepare package source
