@@ -56,15 +56,13 @@ namespace AlphaOmega.Debug
 			: base(section)
 		{
 			if(section.sh_type != Elf.SHT.SYMTAB && section.sh_type != Elf.SHT.DYNSYM)
-				throw new ArgumentException(String.Format(Resources.errUnsupportedSectionArg1, String.Join("|", new String[] { Elf.SHT.SYMTAB.ToString(), Elf.SHT.DYNSYM.ToString(), })));
+				throw new ArgumentException(String.Format(Resources.errUnsupportedSectionArg1, Elf.SHT.SYMTAB + "|" + Elf.SHT.DYNSYM));
 		}
 
 		/// <summary>Get all symbols in the section</summary>
 		/// <returns>Stream of all symbols in the current section</returns>
 		public IEnumerator<SymbolSectionItem> GetEnumerator()
 		{
-			//Byte[] payload = this._section.GetData();
-
 			UInt64 offset = base.Section.sh_offset;
 			UInt64 maxOffset = base.Section.sh_offset + base.Section.sh_size;
 			UInt64 sizeOfStruct = this.SizeOfStruct;

@@ -20,8 +20,6 @@ namespace AlphaOmega.Debug
 		/// <returns>Stream of notes from current section</returns>
 		public IEnumerator<NoteSectionItem> GetEnumerator()
 		{
-			//Byte[] data = base.Section.GetData();
-
 			UInt64 offset = base.Section.sh_offset;
 			UInt64 maxOffset = offset + base.Section.sh_size;
 			ElfHeader header = base.Section.File.Header;

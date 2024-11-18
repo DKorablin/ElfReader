@@ -70,7 +70,7 @@ namespace AlphaOmega.Debug
 			UInt32 diff = pointer - key;
 
 			//TODO: Here i can add found string to the SortedList<,>
-			String result = nearestString.Substring((Int32)diff, (Int32)(nearestString.Length - diff));
+			String result = nearestString?.Substring((Int32)diff, (Int32)(nearestString.Length - diff));
 			return result;
 		}
 
