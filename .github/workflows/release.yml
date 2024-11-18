@@ -54,7 +54,7 @@ jobs:
       uses: mathieudutour/github-tag-action@v6.2
       with:
         github_token: ${{secrets.GITHUB_TOKEN}}
-        #custom_tag: 1.0.4
+        custom_tag: 1.1.84
 
   build_net_framework:
     name: Building .NET Framework assembly
@@ -122,10 +122,10 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: bin
-    - name: Zipping artifact
+    - name: Zipping artifacts
       run: zip -qq -r ${{github.event.repository.name}}_${{needs.version.outputs.new_tag}}.zip *
       working-directory: ${{github.workspace}}/bin
-    - name: Deploying GitHub Release
+    - name: Deploying GitHub release
       uses: ncipollo/release-action@v1
       with:
         artifacts: ${{github.workspace}}/bin/${{github.event.repository.name}}_${{needs.version.outputs.new_tag}}.zip
@@ -154,7 +154,7 @@ jobs:
         path: bin
     - name: Packing artifacts
       run: nuget pack ${{env.SolutionName}}.dll.nuspec -Version ${{needs.version.outputs.new_version}} -OutputDirectory nupkg
-    - name: Pepare package source
+    - name: Peparing package source
       run: dotnet nuget add source --username DKorablin --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/DKorablin/index.json"
-    - name: Deploying GitHub package
+    - name: Deploying package to GitHub
       run: dotnet nuget push nupkg\*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
