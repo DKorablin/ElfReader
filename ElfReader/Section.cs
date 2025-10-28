@@ -7,12 +7,12 @@ namespace AlphaOmega.Debug
 	/// An object file's section header table lets one locate all the file's sections.
 	/// The section header table is an array of <see cref="Elf.Elf32_Shdr"/> or <see cref="Elf.Elf64_Shdr"/> structures as described below.
 	/// A section header table index is a subscript into this array.
-	/// The ELF header's <see cref="Elf.Elf64_Shdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
-	/// <see cref="Elf.Elf64_Shdr.e_shnum"/> normally tells how many entries the section header table contains.
-	/// <see cref="Elf.Elf64_Shdr.e_shentsize"/> gives the size in bytes of each entry.
+	/// The ELF header's <see cref="Elf.Elf64_Ehdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
+	/// <see cref="Elf.Elf64_Ehdr.e_shnum"/> normally tells how many entries the section header table contains.
+	/// <see cref="Elf.Elf64_Ehdr.e_shentsize"/> gives the size in bytes of each entry.
 	/// </summary>
 	/// <remarks>
-	/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the st_shndx member of a symbol table entry and the e_shnum and e_shstrndx members of the ELF header.
+	/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf.Elf64_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf.Elf64_Ehdr.e_shnum"/> and <see cref="Elf.Elf64_Ehdr.e_shstrndx"/> members of the ELF header.
 	/// In such contexts, the reserved values do not represent actual sections in the object file.
 	/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 	/// </remarks>
@@ -53,7 +53,7 @@ namespace AlphaOmega.Debug
 		/// <summary>
 		/// Some sections have address alignment constraints.
 		/// For example, if a section holds a double-word, the system must ensure double-word alignment for the entire section.
-		/// That is, the value of sh_addr must be congruent to 0, modulo the value of sh_addralign.
+		/// That is, the value of <see cref="sh_addr"/> must be congruent to 0, modulo the value of <see cref="sh_addralign"/>.
 		/// Currently, only 0 and positive integral powers of two are allowed.
 		/// Values 0 and 1 mean the section has no alignment constraints.
 		/// </summary>
@@ -76,7 +76,7 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Section Attribute Flags</summary>
 		/// <remarks>
-		/// If a flag bit is set in sh_flags, the attribute is on for the section.
+		/// If a flag bit is set in <see cref="sh_flags"/>, the attribute is on for the section.
 		/// Otherwise, the attribute is off or does not apply.
 		/// Undefined attributes are reserved and set to zero.
 		/// </remarks>
@@ -88,7 +88,7 @@ namespace AlphaOmega.Debug
 		/// <summary>Values in this inclusive range are reserved for processor-specific semantics</summary>
 		public Boolean IsProc => this.sh_type >= Elf.SHT.LOPROC && this.sh_type <= Elf.SHT.HIPROC;
 
-		/// <summary>Section types between SHT_LOUSER and SHT_HIUSER can be used by the application, without conflicting with current or future system-defined section types</summary>
+		/// <summary>Section types between <see cref="Elf.SHT.LOUSER"/> and <see cref="Elf.SHT.HIUSER"/> can be used by the application, without conflicting with current or future system-defined section types</summary>
 		public Boolean IsUser => this.sh_type >= Elf.SHT.LOUSER && this.sh_type <= Elf.SHT.HIUSER;
 
 		internal Section(ElfFile file, UInt32 index, Elf.Elf32_Shdr section)
