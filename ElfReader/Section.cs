@@ -7,9 +7,9 @@ namespace AlphaOmega.Debug
 	/// An object file's section header table lets one locate all the file's sections.
 	/// The section header table is an array of <see cref="Elf.Elf32_Shdr"/> or <see cref="Elf.Elf64_Shdr"/> structures as described below.
 	/// A section header table index is a subscript into this array.
-	/// The ELF header's e_shoff member gives the byte offset from the beginning of the file to the section header table.
-	/// e_shnum normally tells how many entries the section header table contains.
-	/// e_shentsize gives the size in bytes of each entry.
+	/// The ELF header's <see cref="Elf.Elf64_Shdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
+	/// <see cref="Elf.Elf64_Shdr.e_shnum"/> normally tells how many entries the section header table contains.
+	/// <see cref="Elf.Elf64_Shdr.e_shentsize"/> gives the size in bytes of each entry.
 	/// </summary>
 	/// <remarks>
 	/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the st_shndx member of a symbol table entry and the e_shnum and e_shstrndx members of the ELF header.
@@ -90,7 +90,6 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Section types between SHT_LOUSER and SHT_HIUSER can be used by the application, without conflicting with current or future system-defined section types</summary>
 		public Boolean IsUser => this.sh_type >= Elf.SHT.LOUSER && this.sh_type <= Elf.SHT.HIUSER;
-
 
 		internal Section(ElfFile file, UInt32 index, Elf.Elf32_Shdr section)
 			: this(file, index)

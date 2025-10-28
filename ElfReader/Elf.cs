@@ -15,7 +15,7 @@ namespace AlphaOmega.Debug
 		/// If so, the processor supplement describes the model used.
 		/// </summary>
 		/// <remarks>Other classes will be defined as necessary, with different basic types and sizes for object file data</remarks>
-		public enum ELFCLASS : byte
+		public enum ELFCLASS : Byte
 		{
 			/// <summary>Invalid class</summary>
 			NONE = 0,
@@ -28,7 +28,7 @@ namespace AlphaOmega.Debug
 		}
 
 		/// <summary>Specifies the encoding of both the data structures used by object file container and data contained in object file sections</summary>
-		public enum ELFDATA : byte
+		public enum ELFDATA : Byte
 		{
 			/// <summary>Invalid data encoding</summary>
 			NONE = 0,
@@ -41,7 +41,7 @@ namespace AlphaOmega.Debug
 		}
 
 		/// <summary>This member identifies the object file version</summary>
-		public enum EV : byte
+		public enum EV : Byte
 		{
 			/// <summary>Invalid version</summary>
 			NONE = 0,
@@ -50,7 +50,7 @@ namespace AlphaOmega.Debug
 		}
 
 		/// <summary>Identifies the OS- or ABI-specific ELF extensions used by this file</summary>
-		public enum ELFOSABI : byte
+		public enum ELFOSABI : Byte
 		{
 			/// <summary>No extensions or unspecified</summary>
 			NONE = 0,
@@ -137,7 +137,7 @@ namespace AlphaOmega.Debug
 			/// <summary>
 			/// This value marks the beginning of the unused bytes in e_ident.
 			/// These bytes are reserved and set to zero; programs that read object files should ignore them.
-			/// The value of nident will change in the future if currently unused bytes are given meanings.
+			/// The value of <see cref="nident"/> will change in the future if currently unused bytes are given meanings.
 			/// </summary>
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
 			public Byte[] nident;
@@ -340,9 +340,9 @@ namespace AlphaOmega.Debug
 			public UInt16 e_phentsize;
 			/// <summary>
 			/// This member holds the number of entries in the program header table.
-			/// Thus the product of e_phentsize and e_phnum gives the table's size in bytes.
+			/// Thus the product of <see cref="e_phentsize"/> and <see cref="e_phnum"/> gives the table's size in bytes.
 			/// </summary>
-			/// <remarks>If a file has no program header table, e_phnum holds the value zero</remarks>
+			/// <remarks>If a file has no program header table, <see cref="e_phnum"/> holds the value zero</remarks>
 			public UInt16 e_phnum;
 			/// <summary>
 			/// This member holds a section header's size in bytes.
@@ -352,9 +352,9 @@ namespace AlphaOmega.Debug
 			public UInt16 e_shentsize;
 			/// <summary>
 			/// This member holds the number of entries in the section header table.
-			/// Thus the product of e_shentsize and e_shnum gives the section header table's size in bytes.
+			/// Thus the product of <see cref="e_shentsize"/> and <see cref="e_shnum"/> gives the section header table's size in bytes.
 			/// </summary>
-			/// <remarks>If a file has no section header table, e_shnum holds the value zero</remarks>
+			/// <remarks>If a file has no section header table, <see cref="e_shnum"/> holds the value zero</remarks>
 			public UInt16 e_shnum;
 			/// <summary>This member holds the section header table index of the entry associated with the section name string table</summary>
 			/// <remarks>If the file has no section name string table, this member holds the value <see cref="SHN.UNDEF"/></remarks>
@@ -408,9 +408,9 @@ namespace AlphaOmega.Debug
 			public UInt16 e_phentsize;
 			/// <summary>
 			/// This member holds the number of entries in the program header table.
-			/// Thus the product of e_phentsize and e_phnum gives the table's size in bytes.
+			/// Thus the product of <see cref="e_phentsize"/> and <see cref="e_phnum"/> gives the table's size in bytes.
 			/// </summary>
-			/// <remarks>If a file has no program header table, e_phnum holds the value zero</remarks>
+			/// <remarks>If a file has no program header table, <see cref="e_phnum"/> holds the value zero</remarks>
 			public UInt16 e_phnum;
 			/// <summary>
 			/// This member holds a section header's size in bytes.
@@ -420,9 +420,9 @@ namespace AlphaOmega.Debug
 			public UInt16 e_shentsize;
 			/// <summary>
 			/// This member holds the number of entries in the section header table.
-			/// Thus the product of e_shentsize and e_shnum gives the section header table's size in bytes.
+			/// Thus the product of <see cref="e_shentsize"/> and <see cref="e_shnum"/> gives the section header table's size in bytes.
 			/// </summary>
-			/// <remarks>If a file has no section header table, e_shnum holds the value zero</remarks>
+			/// <remarks>If a file has no section header table, <see cref="e_shnum"/> holds the value zero</remarks>
 			public UInt16 e_shnum;
 			/// <summary>This member holds the section header table index of the entry associated with the section name string table</summary>
 			/// <remarks>If the file has no section name string table, this member holds the value <see cref="SHN.UNDEF"/></remarks>
@@ -479,7 +479,7 @@ namespace AlphaOmega.Debug
 			/// <summary>These sections hold a string table</summary>
 			/// <remarks>An object file can have multiple string table sections</remarks>
 			STRTAB = 3,
-			/// <summary>This section holds relocation entries with explicit addends, such as type Elf32_Rela for the 32-bit class of object files</summary>
+			/// <summary>This section holds relocation entries with explicit addends, such as type <see cref="Elf32_Rela"/> for the 32-bit class of object files</summary>
 			/// <remarks>An object file can have multiple relocation sections</remarks>
 			RELA = 4,
 			/// <summary>This section holds a symbol hash table. All dynamically linked object files must contain a symbol hash table</summary>
@@ -524,9 +524,9 @@ namespace AlphaOmega.Debug
 			/// The section is an array of Elf32_Word values.
 			/// Each value corresponds one to one with a symbol table entry and appear in the same order as those entries.
 			/// The values represent the section header indexes against which the symbol table entries are defined.
-			/// All of the values in this section must be valid section header indexes whether or not the st_shndx field in the corresponding symbol table entry contains the special escape code <see cref="SHN.XINDEX"/>.
+			/// All of the values in this section must be valid section header indexes whether or not the <see cref="Elf64_Sym.st_shndx"/> field in the corresponding symbol table entry contains the special escape code <see cref="SHN.XINDEX"/>.
 			/// </summary>
-			SYMTAB_SHNDX=18,
+			SYMTAB_SHNDX = 18,
 			/// <summary>Values in this inclusive range are reserved for operating system-specific semantics</summary>
 			LOOS=0x60000000,
 			/// <summary>Values in this inclusive range are reserved for operating system-specific semantics</summary>
@@ -561,9 +561,9 @@ namespace AlphaOmega.Debug
 			/// <summary>
 			/// The data in the section may be merged to eliminate duplication.
 			/// Unless the <see cref="SHF.STRINGS"/> flag is also set, the data elements in the section are of a uniform size.
-			/// The size of each element is specified in the section header's sh_entsize field.
+			/// The size of each element is specified in the section header's <see cref="Elf64_Shdr.sh_entsize"/> field.
 			/// If the <see cref="SHF.STRINGS"/> flag is also set, the data elements consist of null-terminated character strings.
-			/// The size of each character is specified in the section header's sh_entsize field.
+			/// The size of each character is specified in the section header's <see cref="Elf64_Shdr.sh_entsize"/> field.
 			/// </summary>
 			/// <remarks>
 			/// Each element in the section is compared against other elements in sections with the same name, type and flags.
@@ -574,7 +574,7 @@ namespace AlphaOmega.Debug
 			/// </remarks>
 			MERGE = 0x10,
 			/// <summary>The data elements in the section consist of null-terminated character strings</summary>
-			/// <remarks>The size of each character is specified in the section header's sh_entsize field</remarks>
+			/// <remarks>The size of each character is specified in the section header's <see cref="Elf64_Shdr.sh_entsize"/> field</remarks>
 			STRINGS = 0x20,
 			/// <summary>The sh_info field of this section header holds a section header table index</summary>
 			INFO_LINK=0x40,
@@ -608,12 +608,12 @@ namespace AlphaOmega.Debug
 		/// An object file's section header table lets one locate all the file's sections.
 		/// The section header table is an array of <see cref="Elf32_Shdr"/> or <see cref="Elf64_Shdr"/> structures as described below.
 		/// A section header table index is a subscript into this array.
-		/// The ELF header's e_shoff member gives the byte offset from the beginning of the file to the section header table.
-		/// e_shnum normally tells how many entries the section header table contains.
-		/// e_shentsize gives the size in bytes of each entry.
+		/// The ELF header's <see cref="Elf32_Shdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
+		/// <see cref="Elf32_Shdr.e_shnum"/> normally tells how many entries the section header table contains.
+		/// <see cref="Elf32_Shdr.e_shentsize"/> gives the size in bytes of each entry.
 		/// </summary>
 		/// <remarks>
-		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the st_shndx member of a symbol table entry and the e_shnum and e_shstrndx members of the ELF header.
+		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf32_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf32_Shdr.e_shnum"/> and <see cref="Elf32_Shdr.e_shstrndx"/> members of the ELF header.
 		/// In such contexts, the reserved values do not represent actual sections in the object file.
 		/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 		/// </remarks>
@@ -647,7 +647,7 @@ namespace AlphaOmega.Debug
 			/// <summary>Some sections have address alignment constraints</summary>
 			/// <remarks>
 			/// For example, if a section holds a double-word, the system must ensure double-word alignment for the entire section.
-			/// That is, the value of sh_addr must be congruent to 0, modulo the value of sh_addralign.
+			/// That is, the value of <see cref="sh_addr"/> must be congruent to 0, modulo the value of <see cref="sh_addralign"/>.
 			/// Currently, only 0 and positive integral powers of two are allowed.
 			/// Values 0 and 1 mean the section has no alignment constraints.
 			/// </remarks>
@@ -681,12 +681,12 @@ namespace AlphaOmega.Debug
 		/// An object file's section header table lets one locate all the file's sections.
 		/// The section header table is an array of <see cref="Elf32_Shdr"/> or <see cref="Elf64_Shdr"/> structures as described below.
 		/// A section header table index is a subscript into this array.
-		/// The ELF header's e_shoff member gives the byte offset from the beginning of the file to the section header table.
-		/// e_shnum normally tells how many entries the section header table contains.
-		/// e_shentsize gives the size in bytes of each entry.
+		/// The ELF header's <see cref="Elf64_Shdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
+		/// <see cref="Elf64_Shdr.e_shnum"/> normally tells how many entries the section header table contains.
+		/// <see cref="Elf64_Shdr.e_shentsize"/> gives the size in bytes of each entry.
 		/// </summary>
 		/// <remarks>
-		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the st_shndx member of a symbol table entry and the e_shnum and e_shstrndx members of the ELF header.
+		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf64_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf64_Shdr.e_shnum"/> and <see cref="Elf64_Shdr.e_shstrndx"/> members of the ELF header.
 		/// In such contexts, the reserved values do not represent actual sections in the object file.
 		/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 		/// </remarks>
@@ -721,7 +721,7 @@ namespace AlphaOmega.Debug
 			/// <summary>Some sections have address alignment constraints</summary>
 			/// <remarks>
 			/// For example, if a section holds a double-word, the system must ensure double-word alignment for the entire section.
-			/// That is, the value of sh_addr must be congruent to 0, modulo the value of sh_addralign.
+			/// That is, the value of <see cref="sh_addr"/> must be congruent to 0, modulo the value of <see cref="sh_addralign"/>.
 			/// Currently, only 0 and positive integral powers of two are allowed.
 			/// Values 0 and 1 mean the section has no alignment constraints.
 			/// </remarks>

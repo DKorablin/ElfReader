@@ -36,9 +36,9 @@ namespace AlphaOmega.Debug
 		public readonly UInt16 e_phentsize;
 		/// <summary>
 		/// This member holds the number of entries in the program header table.
-		/// Thus the product of e_phentsize and e_phnum gives the table's size in bytes.
+		/// Thus the product of <see cref="e_phentsize"/> and <see cref="e_phnum"/> gives the table's size in bytes.
 		/// </summary>
-		/// <remarks>If a file has no program header table, e_phnum holds the value zero</remarks>
+		/// <remarks>If a file has no program header table, <see cref="e_phnum"/> holds the value zero</remarks>
 		public readonly UInt16 e_phnum;
 		/// <summary>
 		/// This member holds a section header's size in bytes.
@@ -48,9 +48,9 @@ namespace AlphaOmega.Debug
 		public readonly UInt16 e_shentsize;
 		/// <summary>
 		/// This member holds the number of entries in the section header table.
-		/// Thus the product of e_shentsize and e_shnum gives the section header table's size in bytes.
+		/// Thus the product of <see cref="e_shentsize"/> and <see cref="e_shnum"/> gives the section header table's size in bytes.
 		/// </summary>
-		/// <remarks>If a file has no section header table, e_shnum holds the value zero</remarks>
+		/// <remarks>If a file has no section header table, <see cref="e_shnum"/> holds the value zero</remarks>
 		public readonly UInt16 e_shnum;
 
 		/// <summary>This member holds the section header table index of the entry associated with the section name string table</summary>

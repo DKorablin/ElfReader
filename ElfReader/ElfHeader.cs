@@ -78,9 +78,9 @@ namespace AlphaOmega.Debug
 				: throw new InvalidOperationException(Resources.errHeaderInvalid);
 
 		/// <summary>Read bytes from image</summary>
-		/// <param name="offset">offset from beggining of the file</param>
+		/// <param name="offset">offset from beginning of the file</param>
 		/// <param name="length">How much to read</param>
-		/// <returns>Readed bytes</returns>
+		/// <returns>Read bytes</returns>
 		public Byte[] ReadBytes(UInt64 offset, UInt64 length)
 			=> this.Loader.ReadBytes(checked((UInt32)offset), checked((UInt32)length));
 
@@ -105,13 +105,13 @@ namespace AlphaOmega.Debug
 
 		/// <summary>Get structure from specific RVA</summary>
 		/// <typeparam name="T">Structure to map</typeparam>
-		/// <param name="offset">RVA to the beggining of structure</param>
+		/// <param name="offset">RVA to the beginning of structure</param>
 		/// <returns>Mapped structure</returns>
 		public T PtrToStructure<T>(UInt64 offset) where T : struct
 			=> this.Loader.PtrToStructure<T>(checked((UInt32)offset));
 
 		/// <summary>Get string from specific RVA</summary>
-		/// <param name="offset">RVA to the beggining of string</param>
+		/// <param name="offset">RVA to the beginning of string</param>
 		/// <returns>Mapped string</returns>
 		public String PtrToStringAnsi(UInt64 offset)
 			=> this.Loader.PtrToStringAnsi(checked((UInt32)offset));

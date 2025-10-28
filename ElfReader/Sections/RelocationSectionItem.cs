@@ -16,11 +16,11 @@ namespace AlphaOmega.Debug
 		/// </remarks>
 		public readonly UInt64 r_offset;
 
-		/// <summary>
-		/// This member gives both the symbol table index, with respect to which the relocation must be made, and the type of relocation to apply.
+		/// <summary>This member gives both the symbol table index, with respect to which the relocation must be made, and the type of relocation to apply.</summary>
+		/// <remarks>
 		/// For example, a call instruction's relocation entry will hold the symbol table index of the function being called.
 		/// If the index is STN_UNDEF, the undefined symbol index, the relocation uses 0 as the symbol value.
-		/// </summary>
+		/// </remarks>
 		public readonly UInt64 r_info;
 
 		internal RelocationSectionItem(Elf.Elf32_Rel relocation)
