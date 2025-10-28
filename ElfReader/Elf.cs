@@ -608,12 +608,12 @@ namespace AlphaOmega.Debug
 		/// An object file's section header table lets one locate all the file's sections.
 		/// The section header table is an array of <see cref="Elf32_Shdr"/> or <see cref="Elf64_Shdr"/> structures as described below.
 		/// A section header table index is a subscript into this array.
-		/// The ELF header's <see cref="Elf32_Shdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
-		/// <see cref="Elf32_Shdr.e_shnum"/> normally tells how many entries the section header table contains.
-		/// <see cref="Elf32_Shdr.e_shentsize"/> gives the size in bytes of each entry.
+		/// The ELF header's <see cref="Elf32_Ehdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
+		/// <see cref="Elf64_Ehdr.e_shnum"/> normally tells how many entries the section header table contains.
+		/// <see cref="Elf32_Ehdr.e_shentsize"/> gives the size in bytes of each entry.
 		/// </summary>
 		/// <remarks>
-		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf32_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf32_Shdr.e_shnum"/> and <see cref="Elf32_Shdr.e_shstrndx"/> members of the ELF header.
+		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf32_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf64_Ehdr.e_shnum"/> and <see cref="Elf32_Ehdr.e_shstrndx"/> members of the ELF header.
 		/// In such contexts, the reserved values do not represent actual sections in the object file.
 		/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 		/// </remarks>
@@ -681,12 +681,12 @@ namespace AlphaOmega.Debug
 		/// An object file's section header table lets one locate all the file's sections.
 		/// The section header table is an array of <see cref="Elf32_Shdr"/> or <see cref="Elf64_Shdr"/> structures as described below.
 		/// A section header table index is a subscript into this array.
-		/// The ELF header's <see cref="Elf64_Shdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
-		/// <see cref="Elf64_Shdr.e_shnum"/> normally tells how many entries the section header table contains.
-		/// <see cref="Elf64_Shdr.e_shentsize"/> gives the size in bytes of each entry.
+		/// The ELF header's <see cref="Elf64_Ehdr.e_shoff"/> member gives the byte offset from the beginning of the file to the section header table.
+		/// <see cref="Elf64_Ehdr.e_shnum"/> normally tells how many entries the section header table contains.
+		/// <see cref="Elf64_Ehdr.e_shentsize"/> gives the size in bytes of each entry.
 		/// </summary>
 		/// <remarks>
-		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf64_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf64_Shdr.e_shnum"/> and <see cref="Elf64_Shdr.e_shstrndx"/> members of the ELF header.
+		/// Some section header table indexes are reserved in contexts where index size is restricted, for example, the <see cref="Elf64_Sym.st_shndx"/> member of a symbol table entry and the <see cref="Elf64_Shdr.e_shnum"/> and <see cref="Elf64_Ehdr.e_shstrndx"/> members of the ELF header.
 		/// In such contexts, the reserved values do not represent actual sections in the object file.
 		/// Also in such contexts, an escape value indicates that the actual section index is to be found elsewhere, in a larger field.
 		/// </remarks>
