@@ -152,8 +152,8 @@ namespace AlphaOmega.Debug
 
 		/// <summary>File Identifiers</summary>
 		/// <remarks>
-		/// Although the core file contents are unspecified, type ET_CORE is reserved to mark the file.
-		/// Values from ET_LOPROC through ET_HIPROC (inclusive) are reserved for processor-specific semantics.
+		/// Although the core file contents are unspecified, type <see cref="ET.CORE"/> is reserved to mark the file.
+		/// Values from <see cref="ET.LOPROC"/> through <see cref="ET.HIPROC"/> (inclusive) are reserved for processor-specific semantics.
 		/// Other values are reserved and will be assigned to new object file types as necessary.
 		/// </remarks>
 		public enum ET : UInt16
@@ -317,10 +317,11 @@ namespace AlphaOmega.Debug
 			/// <summary>This member identifies the object file version</summary>
 			/// <remarks>
 			/// The value 1 signifies the original file format; extensions will create new versions with higher numbers.
-			/// The value of EV_CURRENT changes as necessary to reflect the current version number.
+			/// The value of <see cref="EV.CURRENT"/> changes as necessary to reflect the current version number.
 			/// </remarks>
 			public Elf.EV e_version;
-			/// <summary>This member gives the virtual address to which the system first transfers control, thus starting the process. If the file has no associated entry point, this member holds zero</summary>
+			/// <summary>This member gives the virtual address to which the system first transfers control, thus starting the process.</summary>
+			/// <remarks>If the file has no associated entry point, this member holds zero</remarks>
 			public UInt32 e_entry;
 			/// <summary>This member holds the program header table's file offset in bytes</summary>
 			/// <remarks>If the file has no program header table, this member holds zero</remarks>
@@ -359,6 +360,9 @@ namespace AlphaOmega.Debug
 			/// <summary>This member holds the section header table index of the entry associated with the section name string table</summary>
 			/// <remarks>If the file has no section name string table, this member holds the value <see cref="SHN.UNDEF"/></remarks>
 			public UInt16 e_shstrndx;
+
+			/// <summary>ELF executable has entry point.</summary>
+			public Boolean HasEntryPoint { get => this.e_entry != 0; }
 
 			/// <summary>Special Section Indexes</summary>
 			public SHN SpecShIndex
@@ -493,7 +497,7 @@ namespace AlphaOmega.Debug
 			/// <summary>A section of this type occupies no space in the file but otherwise resembles <see cref="SHT.PROGBITS"/></summary>
 			/// <remarks>Although this section contains no bytes, the sh_offset member contains the conceptual file offset</remarks>
 			NOBITS = 8,
-			/// <summary>This section holds relocation entries without explicit addends, such as type Elf32_Rel for the 32-bit class of object files</summary>
+			/// <summary>This section holds relocation entries without explicit addends, such as type <see cref="Elf32_Rel"/> for the 32-bit class of object files</summary>
 			/// <remarks>An object file can have multiple relocation sections</remarks>
 			REL = 9,
 			/// <summary>This section type is reserved but has unspecified semantics</summary>
@@ -515,10 +519,10 @@ namespace AlphaOmega.Debug
 			/// <summary>
 			/// This section defines a section group.
 			/// A section group is a set of sections that are related and that must be treated specially by the linker (see below for further details).
-			/// Sections of type SHT.GROUP may appear only in relocatable objects (objects with the ELF header e_type member set to <see cref="ET.REL"/>).
+			/// Sections of type SHT.GROUP may appear only in relocatable objects (objects with the ELF header <see cref="Elf64_Ehdr.e_type"/> member set to <see cref="ET.REL"/>).
 			/// The section header table entry for a group section must appear in the section header table before the entries for any of the sections that are members of the group.
 			/// </summary>
-			GROUP=17,
+			GROUP = 17,
 			/// <summary>
 			/// This section is associated with a section of type <see cref="SHT.SYMTAB"/> and is required if any of the section header indexes referenced by that symbol table contain the escape value <see cref="SHN.XINDEX"/>.
 			/// The section is an array of Elf32_Word values.
@@ -552,12 +556,12 @@ namespace AlphaOmega.Debug
 		public enum SHF : UInt32
 		{
 			/// <summary>This section contains data that should be writable during process execution</summary>
-			WRITE=0x1,
+			WRITE = 0x1,
 			/// <summary>This section occupies memory during process execution</summary>
 			/// <remarks>Some control sections do not reside in the memory image of an object file; this attribute is off for those sections</remarks>
 			ALLOC = 0x2,
 			/// <summary>This section contains executable machine instructions</summary>
-			EXECINSTR=0x4,
+			EXECINSTR = 0x4,
 			/// <summary>
 			/// The data in the section may be merged to eliminate duplication.
 			/// Unless the <see cref="SHF.STRINGS"/> flag is also set, the data elements in the section are of a uniform size.
@@ -576,23 +580,23 @@ namespace AlphaOmega.Debug
 			/// <summary>The data elements in the section consist of null-terminated character strings</summary>
 			/// <remarks>The size of each character is specified in the section header's <see cref="Elf64_Shdr.sh_entsize"/> field</remarks>
 			STRINGS = 0x20,
-			/// <summary>The sh_info field of this section header holds a section header table index</summary>
-			INFO_LINK=0x40,
+			/// <summary>The <see cref="Elf64_Shdr.sh_info"/> field of this section header holds a section header table index</summary>
+			INFO_LINK = 0x40,
 			/// <summary>
 			/// This flag adds special ordering requirements for link editors.
-			/// The requirements apply if the sh_link field of this section's header references another section (the linked-to section).
+			/// The requirements apply if the <see cref="Elf64_Shdr.sh_link"/> field of this section's header references another section (the linked-to section).
 			/// If this section is combined with other sections in the output file, it must appear in the same relative order with respect to those sections, as the linked-to section appears with respect to sections the linked-to section is combined with.
 			/// </summary>
-			LINK_ORDER=0x80,
+			LINK_ORDER = 0x80,
 			/// <summary>
 			/// This section requires special OS-specific processing (beyond the standard linking rules) to avoid incorrect behavior.
-			/// If this section has either an sh_type value or contains sh_flags bits in the OS-specific ranges for those fields, and a link editor processing this section does not recognize those values, then the link editor should reject the object file containing this section with an error.
+			/// If this section has either an <see cref="Elf64_Shdr.sh_type"/> value or contains sh_flags bits in the OS-specific ranges for those fields, and a link editor processing this section does not recognize those values, then the link editor should reject the object file containing this section with an error.
 			/// </summary>
-			OS_NONCONFORMING=0x100,
+			OS_NONCONFORMING = 0x100,
 			/// <summary>
 			/// This section is a member (perhaps the only one) of a section group.
 			/// The section must be referenced by a section of type <see cref="SHT.GROUP"/>.
-			/// The SHF_GROUP flag may be set only for sections contained in relocatable objects (objects with the ELF header e_type member set to ET_REL).
+			/// The SHF_GROUP flag may be set only for sections contained in relocatable objects (objects with the ELF header <see cref="Elf64_Ehdr.e_type"/> member set to ET_REL).
 			/// </summary>
 			GROUP = 0x200,
 			/// <summary>All bits included in this mask are reserved for operating system-specific semantics</summary>
@@ -706,7 +710,7 @@ namespace AlphaOmega.Debug
 			/// </summary>
 			public UInt64 sh_addr;
 			/// <summary>This member gives the byte offset from the beginning of the file to the first byte in the section</summary>
-			/// <remarks>Section type <see cref="SHT.NOBITS"/>, described below, occupies no space in the file, and its sh_offset member locates the conceptual placement in the file</remarks>
+			/// <remarks>Section type <see cref="SHT.NOBITS"/>, described below, occupies no space in the file, and its <see cref="sh_offset"/> member locates the conceptual placement in the file</remarks>
 			public UInt64 sh_offset;
 			/// <summary>This member gives the section's size in bytes</summary>
 			/// <remarks>
@@ -735,7 +739,7 @@ namespace AlphaOmega.Debug
 
 			/// <summary>Section Attribute Flags</summary>
 			/// <remarks>
-			/// If a flag bit is set in sh_flags, the attribute is on for the section.
+			/// If a flag bit is set in <see cref="sh_flags"/>, the attribute is on for the section.
 			/// Otherwise, the attribute is off or does not apply.
 			/// Undefined attributes are reserved and set to zero.
 			/// </remarks>

@@ -29,17 +29,20 @@ namespace AlphaOmega.Debug
 		/// <summary>Sections support 1-bit flags that describe miscellaneous attributes</summary>
 		public readonly Elf.SHF sh_flags;
 
-		/// <summary>If the section is to appear in the memory image of a process, this member gives the address at which the section's first byte should reside. Otherwise, the member contains 0</summary>
+		/// <summary>
+		/// If the section is to appear in the memory image of a process, this member gives the address at which the section's first byte should reside.
+		/// Otherwise, the member contains 0.
+		/// </summary>
 		public readonly UInt64 sh_addr;
 
 		/// <summary>
 		/// This member gives the byte offset from the beginning of the file to the first byte in the section.
-		/// Section type <see cref="Elf.SHT.NOBITS"/>, described below, occupies no space in the file, and its sh_offset member locates the conceptual placement in the file.
+		/// Section type <see cref="Elf.SHT.NOBITS"/>, described below, occupies no space in the file, and its <see cref="sh_offset"/> member locates the conceptual placement in the file.
 		/// </summary>
 		public readonly UInt64 sh_offset;
 
 		/// <summary>
-		/// This member gives the section's size in bytes. Unless the section type is <see cref="Elf.SHT.NOBITS"/>, the section occupies sh_size bytes in the file.
+		/// This member gives the section's size in bytes. Unless the section type is <see cref="Elf.SHT.NOBITS"/>, the section occupies <see cref="sh_size"/> bytes in the file.
 		/// A section of type <see cref="Elf.SHT.NOBITS"/> can have a nonzero size, but it occupies no space in the file.
 		/// </summary>
 		public readonly UInt64 sh_size;
