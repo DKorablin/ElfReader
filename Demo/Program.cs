@@ -20,6 +20,8 @@ namespace Demo
 				Utils.ConsoleWriteMembers(file.Header.Identification);
 				if(file.Header.IsValid)
 				{
+					Utils.ConsoleWriteMembers(file.Header.Header);
+
 					DebugStringSection debugSection = file.GetDebugStringSection();
 					if(debugSection != null)
 						foreach(var symbolSec in debugSection)
@@ -28,8 +30,6 @@ namespace Demo
 					foreach(var noteSec in file.GetNotesSections())
 						foreach(var note in noteSec)
 							Utils.ConsoleWriteMembers(note);
-
-					Utils.ConsoleWriteMembers(file.Header.Header);
 
 					foreach(var strSec in file.GetStringSections())
 						foreach(var str in strSec)

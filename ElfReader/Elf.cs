@@ -319,7 +319,7 @@ namespace AlphaOmega.Debug
 			/// The value 1 signifies the original file format; extensions will create new versions with higher numbers.
 			/// The value of <see cref="EV.CURRENT"/> changes as necessary to reflect the current version number.
 			/// </remarks>
-			public Elf.EV e_version;
+			public UInt32 e_version;
 			/// <summary>This member gives the virtual address to which the system first transfers control, thus starting the process.</summary>
 			/// <remarks>If the file has no associated entry point, this member holds zero</remarks>
 			public UInt32 e_entry;
@@ -390,7 +390,7 @@ namespace AlphaOmega.Debug
 			/// The value 1 signifies the original file format; extensions will create new versions with higher numbers.
 			/// The value of <see cref="EV.CURRENT"/> changes as necessary to reflect the current version number.
 			/// </remarks>
-			public Elf.EV e_version;
+			public UInt64 e_version;
 			/// <summary>This member gives the virtual address to which the system first transfers control, thus starting the process</summary>
 			/// <remarks>If the file has no associated entry point, this member holds zero</remarks>
 			public UInt64 e_entry;

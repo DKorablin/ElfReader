@@ -73,7 +73,7 @@ namespace AlphaOmega.Debug
 		{
 			this.e_type = header32.e_type;
 			this.e_machine = header32.e_machine;
-			this.e_version = header32.e_version;
+			this.e_version = (Elf.EV)header32.e_version;
 			this.e_entry = header32.e_entry;
 			this.e_phoff = header32.e_phoff;
 			this.e_shoff = header32.e_shoff;
@@ -90,7 +90,7 @@ namespace AlphaOmega.Debug
 		{
 			this.e_type = header64.e_type;
 			this.e_machine = header64.e_machine;
-			this.e_version = header64.e_version;
+			this.e_version = (Elf.EV)header64.e_version;
 			this.e_entry = header64.e_entry;
 			this.e_phoff = header64.e_phoff;
 			this.e_shoff = header64.e_shoff;
