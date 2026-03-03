@@ -143,7 +143,8 @@ namespace AlphaOmega.Debug
 			public Byte[] nident;
 
 			/// <summary>String representation for signature field</summary>
-			public String SignatureStr { get { return Encoding.ASCII.GetString(this.magic).Replace("\x7f", "\\x7f"); } }
+			public String SignatureStr
+				=> Encoding.ASCII.GetString(this.magic).Replace("\x7f", "\\x7f");
 
 			/// <summary>ELF header is valid</summary>
 			public Boolean IsValid
@@ -390,7 +391,7 @@ namespace AlphaOmega.Debug
 			/// The value 1 signifies the original file format; extensions will create new versions with higher numbers.
 			/// The value of <see cref="EV.CURRENT"/> changes as necessary to reflect the current version number.
 			/// </remarks>
-			public UInt64 e_version;
+			public UInt32 e_version;
 			/// <summary>This member gives the virtual address to which the system first transfers control, thus starting the process</summary>
 			/// <remarks>If the file has no associated entry point, this member holds zero</remarks>
 			public UInt64 e_entry;
